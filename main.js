@@ -1,3 +1,8 @@
+var onclicktype = 'onclick';
+var isTouchDevice = (navigator.maxTouchPoints || 'ontouchstart' in document.documentElement);
+if (isTouchDevice)
+    onclicktype = 'ontouchstart';
+
 var multiplier = [1, 8, 4, 2, 1];
 var ledMatrix = [];
 var hexOutput = ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'];
@@ -14,7 +19,7 @@ function createMarix() {
             ledRow.push(0);
             table += '' +
                 '<td>' +
-                '<div class="led" ontouchstart="toggleLed(\'' + i + ',' + j + '\')" id="' + i + ',' + j + '"/>' +
+                '<div class="led" ' + onclicktype + '="toggleLed(\'' + i + ',' + j + '\')" id="' + i + ',' + j + '"/>' +
                 '</td>';
         }
         ledMatrix.push(ledRow);
