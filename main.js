@@ -14,7 +14,7 @@ function createMarix() {
             ledRow.push(0);
             table += '' +
                 '<td>' +
-                '<div class="led" onclick="toggleLed(\'' + i + ',' + j + '\')" id="' + i + ',' + j + '"/>' +
+                '<div class="led" ontouchstart="toggleLed(\'' + i + ',' + j + '\')" id="' + i + ',' + j + '"/>' +
                 '</td>';
         }
         ledMatrix.push(ledRow);
