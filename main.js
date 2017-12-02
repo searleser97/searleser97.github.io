@@ -7,7 +7,10 @@ var multiplier = [1, 8, 4, 2, 1];
 var ledMatrix = [];
 var hexOutput = ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'];
 var finalOutput = '';
-
+$('#container').prepend('<br>' +
+        '<button ' + onclicktype + '="insertToFinal()">Insert to Final Output</button>' +
+        '<button ' + onclicktype + '="clearMat()">Clear</button>' +
+        '<button ' + onclicktype + '="resetMat()">Reset</button>');
 function createMarix() {
     ledMatrix = [];
     hexOutput = ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'];
