@@ -12,3 +12,8 @@
 #hexOutput {
     font-size: 30px;
 }
+
+#finalHexOutput {
+    width: 100%;
+    height: 200px;
+}
