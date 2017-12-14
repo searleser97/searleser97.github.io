@@ -14,7 +14,7 @@ $('#container').prepend('<br>' +
 function createMarix() {
     ledMatrix = [];
     hexOutput = ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'];
-    var table = '<table id="ledMatrix">';
+    var table = '<div id="table"><table id="ledMatrix">';
     for (var i = 0; i < 5; i++) {
         var ledRow = [];
         table += '<tr>';
@@ -29,7 +29,7 @@ function createMarix() {
         table += '</tr>';
     }
 
-    table += '</table>';
+    table += '</table></div>';
 
     $('#container').prepend(table);
 }
