@@ -9,7 +9,7 @@ var hexOutput = ['0', '0', '0', '0', '0', '0', '0', '0', '0', '0'];
 var finalOutput = '';
 $('#container').prepend('<br>' +
         '<button ' + onclicktype + '="insertToFinal()">Insert to Final Output</button>' +
-        '<button ' + onclicktype + '="clearMat()">Clear Box</button>' +
+        '<button ' + onclicktype + '="clearMat()">Clear Matrix</button>' +
         '<button ' + onclicktype + '="resetMat()">Reset All</button>');
 function createMarix() {
     ledMatrix = [];
