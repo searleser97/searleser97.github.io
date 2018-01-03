@@ -1,0 +1,12 @@
+a \e,\e,z b
+b a,\e,a b
+b b,\e,\e c
+c c,a,\e c
+c c,z,\e d
+
+a
+d
+
+
+abcc
+abc

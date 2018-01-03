@@ -1,0 +1,26 @@
+a \e,\e,z b
+b a,\e,a c
+c a,\e,\e d
+d a,\e,a c
+d b,a,\e e
+e b,a,\e e
+e \e,z,\e f
+a \e,\e,z g
+g a,\e,x g
+g b,\e,x h
+h b,\e,x h
+h c,x,\e i
+i c,x,\e i
+i \e,z,\e f
+
+a
+f
+
+aabccc
+aaaabb
+aab
+abcc
+abc
+abb
+aabc
+ab
