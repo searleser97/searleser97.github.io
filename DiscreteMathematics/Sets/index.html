@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Conjuntos Discretos</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+    Programa que sirve para calcular algunas operaciones de conjuntos con el siguiente universo.
+    (Los elementos de cada subconjunto deben separarse por un espacio)
+    <br>
+    <br>
+    Universo:
+    <br>
+    { <span id="universo">a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t</span> }
+    <br>
+    <br> Ingrese los elementos del conjunto A:
+    <br>
+    <br>
+    <input class="conjunto" id="a" type="text" />
+    <br>
+    <br> Ingrese los elementos del conjunto B:
+    <br>
+    <br>
+    <input class="conjunto" id="b" type="text" />
+    <br>
+    <br> Ingrese los elementos del conjunto C:
+    <br>
+    <br>
+    <input class="conjunto" id="c" type="text" />
+    <br>
+    <br> Ingrese los elementos del conjunto D:
+    <br>
+    <br>
+    <input class="conjunto" id="d" type="text" />
+    <br>
+    <br>
+    <a class="myButton" id="calcular" onclick="calcular()">Calcular!</a>
+    <br>
+    <br> (A
+    <span class="exponente">c</span>&#8745;B<span class="exponente">c</span>) &#8746; (C
+    <span class="exponente">c</span>&#8745;D<span class="exponente">c</span>) =
+    <br>
+    <br>
+    <span id="uno"></span>
+    <br>
+    <br> (A&#8746;B) &#8745; (C&#8745;D)
+    <span class="exponente">c</span> =
+    <br>
+    <br>
+    <span id="dos"></span>
+    <br>
+    <br> (A&#8745;C) &#8746; (A&#8745;B) &#8746; (A&#8745;D) =
+    <br>
+    <br>
+    <span id="tres"></span>
+    <br>
+    <br>
+    <script src="jquery-2.0.0.min.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>

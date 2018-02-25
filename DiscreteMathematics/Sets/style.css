@@ -1,0 +1,53 @@
+body {
+  background: #211f20;
+  color: white;
+  font-size: 50px;
+  text-align: center;
+  font-family:Arial;
+}
+#universo {
+  background: transparent;
+  border: none;
+  color: white;
+  width: 680px;
+  font-size: 50px;
+}
+
+.conjunto {
+  text-align: center;
+  border-radius: 15px;
+  width: 100%;
+  height: 80px;
+  font-size: 50px;
+}
+.exponente {
+    vertical-align: super;
+    font-size: 30px;
+}
+.myButton {
+	background-color:#0aa36b;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:25px;
+	border:1px solid #0c9e1b;
+  font-size: 60px;
+  outline: none;
+  width: 80%;
+  height: 80px;
+  vertical-align: middle;
+  text-align: center;
+	display: inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	padding:7px 43px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #299118;
+}
+.myButton:hover {
+	background-color:#069142;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}

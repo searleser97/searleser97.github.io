@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Binomio de Newton</title>
+    <link href="style.css" rel="stylesheet" />
+    <script src="jquery-2.0.0.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <h1 align="center">Programa para obtener el coeficiente (c) de &nbsp;
+    <span class="math">c &middot; x <span class="exponente">n-4</span> &middot; y <span class="exponente">4</span></span>&nbsp;
+    usando el Binomio de Newton
+  </h1>
+        <div class="container1">
+            <div class="container2">
+                <div class="parentesis1 inline inputText" id="mas">
+                    <span class="signo">(</span>
+                </div>
+                <input class="a inline constants" placeholder="A" type="number" oninput="ainput()" id="a" onclick="clean()" onkeypress="return numeros(event)">
+                <div class="x inline inputText" id="mas">
+                    <span class="signo">x</span>
+                </div>
+                <div class="mas inline inputText" id="mas">
+                    <span class="signo">+</span>
+                </div>
+                <input class="b inline constants" placeholder="B" type="number" oninput="ainput()" id="b" onclick="clean()" onkeypress="return numeros(event)">
+                <div class="x inline inputText" id="mas">
+                    <span class="signo">y</span>
+                </div>
+                <div class="parentesis1 parentesis2 inline inputText" id="mas">
+                    <span class="signo">)</span>
+                </div>
+            </div>
+            <input class="n inline inputText" placeholder="n" type="number" maxlength="2" oninput="ninput()" id="n" onclick="clean()" onkeypress="return numeros2(event)">
+        </div>
+        <div class="container3">
+            <span id="error"></span>
+            <br>
+            <h3>
+          <span class="math">
+            <span id="result">c</span> &middot; x <span id="variable" class="exponente">
+              n-4</span> &middot; y <span class="exponente">
+                4
+              </span>
+          </span>
+        </h3>
+        <a href="#" class="myButton" id="verTodoboton">Ver toda la serie</a>
+        <div class="todo" id="resultodo">Introduzca Datos Validos para visualizar la serie</div>
+        <div class="credenciales">Desarrollado por: Sergio Gabriel Sánchez Valencia</div>
+        </div>
+
+    </div>
+    <script src="main.js" type="text/javascript"></script>
+</body>
+
+</html>

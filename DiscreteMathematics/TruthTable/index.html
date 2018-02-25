@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tabla de verdad</title>
+
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <h2>Programa que calcula la tabla de verdad de acuerdo a la siguiente proposicion con operaciones modificables.</h2>
+  <div>
+    <table cellspacing="0" id="letters">
+        <tr id="p0" >
+            <td class="bordes">
+                p
+            </td>
+            <td class="bordes">
+                q
+            </td>
+            <td class="bordes">
+                r
+            </td>
+            <td class="bordes">
+                s
+            </td>
+        </tr>
+    </table>
+    <table id="operationsT" cellspacing="0">
+        <tr>
+            <td>[
+                <select id="negacion1">
+                    <option value="1">--</option>
+                    <option value="2">¬</option>
+                </select>
+                p
+            </td>
+            <td>
+                <select id="opmini1">
+                    <option value="1">&#652;</option>
+                    <option value="2">v</option>
+                    <option value="3">&rarr;</option>
+                    <option value="4">&#8596;</option>
+                </select>
+              </td>
+                <td>
+                q]
+            </td>
+            <td>
+              <select id="opmayor1">
+                  <option value="1">&#652;</option>
+                  <option value="2">v</option>
+                  <option value="3">&rarr;</option>
+                  <option value="4">&#8596;</option>
+              </select>
+            </td>
+            <td>
+                [
+                <select id="negacion2">
+                    <option value="1">--</option>
+                    <option value="2">¬</option>
+                </select>
+                p
+            </td>
+            <td>
+              <select id="opmini2">
+                  <option value="1">&#652;</option>
+                  <option value="2">v</option>
+                  <option value="3">&rarr;</option>
+                  <option value="4">&#8596;</option>
+              </select>
+            </td>
+            <td>
+                (r&#652;s)]
+            </td>
+            <td>
+              <select id="opmayor2">
+                  <option value="1">&#652;</option>
+                  <option value="2">v</option>
+                  <option value="3">&rarr;</option>
+                  <option value="4">&#8596;</option>
+              </select>
+            </td>
+            <td>
+                [r
+              </td>
+              <td>
+                &rarr;
+              </td>
+              <td>
+                (s
+              </td>
+              <td>
+                <select id="opmini3">
+                    <option value="1">&#652;</option>
+                    <option value="2">v</option>
+                    <option value="3">&rarr;</option>
+                    <option value="4">&#8596;</option>
+                </select>
+              </td>
+              <td>
+                p)]
+
+            </td>
+
+        </tr>
+    </table>
+    <input type="button" onclick="calcular()" value="calcular">
+  </div>
+  <h4>Por: Sergio Gabriel Sanchez Valencia</h4>
+  <script src="jquery-2.0.0.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

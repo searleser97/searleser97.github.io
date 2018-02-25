@@ -1,0 +1,184 @@
+body {
+    background: #020a2b;
+}
+.constants {
+    width: 100px;
+    height: 70px;
+    font-size: 70px;
+    margin-top: -11px;
+    margin-left: 34px;
+    position: relative;
+    background-color: #020a2b;
+    transition: background-color 0.5s;
+    color: white;
+    border: none;
+    text-align: center;
+}
+.a {
+    margin-left: 34px;
+}
+.x {
+    font-size: 80px;
+    font-weight: bolder;
+    position: absolute;
+    width: 50px;
+    height: 20px;
+    line-height: 5px;
+    text-align: center;
+    top: -23px;
+    margin-right: 50px;
+    font-style: italic;
+}
+.mas {
+    font-size: 60px;
+    font-weight: bolder;
+    position: absolute;
+    width: 50px;
+    height: 20px;
+    line-height: 5px;
+    text-align: center;
+    top: -6px;
+    margin-left: 50px;
+}
+.signo {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+.b {
+    margin-left: 106px;
+}
+.n {
+    margin-top: -105px;
+    font-size: 35px;
+    text-align: center;
+    margin-left: 425px;
+    width: 40px;
+    height: 35px;
+    position: absolute;
+    transition: background 0.2s;
+    background: none;
+    color: white;
+    border: none;
+    font-style: italic;
+}
+.boton {
+    position: relative;
+    height: 100px;
+}
+.container1 {
+    position: absolute;
+    width: 450px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+.container2 {
+    position: relative;
+    margin-top: 45px;
+    width: 420px;
+    height: 60px;
+    /*transform: translate(-50%,-50%);*/
+}
+.inline {
+    display: inline;
+}
+.inputText {
+    text-align: center;
+}
+.parentesis1 {
+    top: -32px;
+    font-size: 85px;
+    font-weight: bolder;
+    position: absolute;
+    width: 35px;
+    height: 20px;
+    line-height: 10px;
+    text-align: center;
+}
+.parentesis2 {
+    margin-left: 61px;
+}
+.a:focus, .b:focus, .n:focus {
+    outline: none;
+    background-color: black;
+}
+.modelo {
+    width: 100px;
+    height: auto;
+    vertical-align: middle
+}
+.exponente {
+    vertical-align: super;
+    font-size: 20px;
+}
+.container3 {
+    text-align: center;
+    height: 50px;
+    width: auto;
+    right: 0;
+    left: 0;
+    top: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    font-size: 20px;
+}
+.math {
+    font-style: italic;
+    font-size: 40px;
+    /*color: #002779;*/
+    color: gray;
+}
+#error {
+    color: #e61717;
+}
+div {
+    color: gray;
+}
+.credenciales {
+    width: 410px;
+    text-align: center;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    left: 0;
+    right: 0;
+}
+
+.todo {
+    display: none;
+    position: relative;
+    background: black;
+    padding: 5px;
+    border-radius: 10px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    margin-top: 5px;
+    /*background: blue;*/
+}
+
+.myButton {
+	background-color:#0aa36b;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #0c9e1b;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:7px 43px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #299118;
+}
+.myButton:hover {
+	background-color:#069142;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
