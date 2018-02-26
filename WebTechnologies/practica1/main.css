@@ -68,3 +68,8 @@ body {
     margin-top: 75px;
     margin-bottom: auto;
 }
+
+.personalInfo {
+    padding-left: 20px;
+    padding-right: 20px;
+}
