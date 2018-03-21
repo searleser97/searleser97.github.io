@@ -1,0 +1,22 @@
+body {
+    font-style: Arial;
+}
+
+.names {
+    font-size: 30px;
+}
+
+.myPanda {
+    float: left;
+    height: 200px;
+    width: auto;
+    margin-right: 100px;
+}
+
+.pandaImg {
+    height: 100%;
+}
+
+.pandas {
+    
+}
