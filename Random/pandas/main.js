@@ -7,8 +7,8 @@ var limit = 0;
 var interval = setInterval(createPandas, 200);
 
 function createPandas () {
-    $('body').append(pandas);
+    $('.pandas').append(pandas);
     limit++;
-    if (limit == numberOfPandas)
-        clearInterval(interval);
+    /*if (limit == numberOfPandas)
+        clearInterval(interval);*/
 }

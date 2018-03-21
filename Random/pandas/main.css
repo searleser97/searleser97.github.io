@@ -8,7 +8,7 @@ body {
 
 .myPanda {
     float: left;
-    height: 200px;
+    height: 180px;
     width: auto;
     margin-right: 100px;
 }
@@ -18,5 +18,8 @@ body {
 }
 
 .pandas {
-    
+    margin-top: 50px;
+    position: absolute;
+    width: 100%;
+    margin-left: 100px;
 }
