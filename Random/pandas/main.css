@@ -13,7 +13,6 @@ body {
 }
 
 .pandaImg {
-    /*height: 100%;*/
     width: 100%;
 }
 
@@ -27,11 +26,10 @@ body {
     right: 0;
 }
 
-.me {
+.us {
     position: fixed;
-    height: 500px;
-    width: 700px;
-    transform: rotate(180deg);
+    height: 80%;
+    width: 60%;
     left: 0;
     right: 0;
     margin-left: auto;
@@ -39,7 +37,8 @@ body {
     top: 100px;
 }
 
-.meimg {
+.usimg {
+    width: 100%;
     height: 100%;
     border-radius: 50px;
 }
