@@ -4,7 +4,7 @@ var pandas = '<div class="myPanda">' +
 
 var numberOfPandas = 10000;
 var limit = 0;
-var interval = setInterval(createPandas, 250);
+var interval = setInterval(createPandas, 200);
 
 function createPandas () {
     $('.pandas').append(pandas);

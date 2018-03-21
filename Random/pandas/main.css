@@ -8,21 +8,23 @@ body {
 
 .myPanda {
     float: left;
-    height: 180px;
-    width: auto;
-    margin-right: 100px;
-    opacity: 0.9;
+    width: 10%;
+    opacity: 0.8;
 }
 
 .pandaImg {
-    height: 100%;
+    /*height: 100%;*/
+    width: 100%;
 }
 
 .pandas {
     margin-top: 50px;
     position: absolute;
-    width: 85%;
-    margin-left: 100px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
 }
 
 .me {
