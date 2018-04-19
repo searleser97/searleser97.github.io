@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title> Practica 2 </title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	</head>
+	<body>
+		<form action="#" id="formas">
+			<fieldset name="personales">
+				<legend>Datos Personales</legend>
+				Nombre:
+				<input type="text" name="nombre" value="Mickey">
+				Apellido parterno:
+				<input type="text" name="apellidop" value="Mouse">
+				Apellido materno:
+				<input type="text" name="apellidom" value="Mouse">
+				<br><br>
+				fecha de nacimiento:
+				<select name="Years" id="Years">
+					<option>1980</option>
+					<option>1981</option>
+					<option>1982</option>
+					<option>1983</option>
+					<option>1984</option>
+					<option>1985</option>
+					<option>1986</option>
+					<option>1987</option>
+					<option>1988</option>
+					<option>1989</option>
+					<option>1990</option>
+					<option>1991</option>
+					<option>1992</option>
+				</select>
+				<select name="Meses" id="Meses">
+					<option>enero</option>
+					<option>febrero</option>
+					<option>marzo</option>
+					<option>abril</option>
+					<option>mayo</option>
+					<option>junio</option>
+					<option>julio</option>
+					<option>agosto</option>
+					<option>septiembre</option>
+					<option>octubre</option>
+					<option>noviembre</option>
+					<option>diciembre</option>
+				</select>
+				<select name="Dias" id="Dias">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+					<option>10</option>
+					<option>11</option>
+					<option>12</option>
+					<option>13</option>
+					<option>14</option>
+					<option>15</option>
+					<option>16</option>
+					<option>17</option>
+					<option>18</option>
+					<option>19</option>
+					<option>20</option>
+					<option>21</option>
+					<option>22</option>
+					<option>23</option>
+					<option>24</option>
+					<option>25</option>
+					<option>26</option>
+					<option>27</option>
+					<option>28</option>
+					<option>29</option>
+					<option>30</option>
+				</select>
+				<br>
+				sexo <input type="radio" name="Genero">masculino<input type="radio" name="Genero">femenino &nbsp; &nbsp;
+				correo<input type="email" name="Correo">
+				
+				<fieldset name="Direccion">
+					<legend>Direccion</legend>
+					calle <input type="text" name="calle" value="2">
+					no. <input type="number" name="numero" value="5">
+					colonia <input type="text" name="colonia" value="guadalupe">
+					<br>
+					municipio o delegacion <input type="text" name="delegacion" value="GAM">
+					ciudad <input type="text" name="ciudad" value="Mouse">
+				</fieldset>
+			</fieldset>
+			<fieldset name="Preferencias">
+				<legend>Preferencias</legend>
+				Lenguaje de programacion preferido
+				<br>
+				<input name="i" type="radio">c++<input name="i" type="radio">C<input name="i" type="radio">java<input name="i" type="radio">python
+				<br>
+				pasatiempos
+				<br>
+				<input type="checkbox" name="pasatiempos">Leer<input name="pasatiempos" type="checkbox">Chatear<input name="pasatiempos" type="checkbox">Hacer deporte
+				<br>
+				<input type="checkbox" name="pasatiempos">ver TV<input name="pasatiempos" type="checkbox">Jugar<input name="pasatiempos" type="checkbox">meditar
+				<br>
+				fuente de consulta de informacion
+				<br>
+				<select name="fuente" multiple="multiple">
+					<option>internet</option>
+					<option>libros</option>
+					<option>revistas</option>
+					<option>periodicos</option>
+					<option>otros</option>
+				</select>
+			</fieldset>
+			<fieldset>
+				<legend>comentarios</legend>
+				<br>
+				<textarea cols="50" rows="10">
+				</textarea>
+			</fieldset>
+			<br>
+			<input name="Enviar" type="submit" value="Enviar" onclick="valida()">
+			<input name="reset" type="reset" value="Limpiar">
+		</form>
+		<script type="text/javascript">
+		var str = "";
+		for (element in formas.elements) {
+		var elem = formas.elements[element];
+		str += "Nombre: " + elem.name + " | Tipo: " + elem.type + " | Valor: " + elem.value + "\n";
+		}
+		alert(str);
+		function valida() {
+		alert('hola');
+		for (element in formas.elements) {
+		var elem = formas.elements[element];
+		if (elem.type == 'text')
+			if (elem.value == "")
+				alert('Al menos el campo ' + elem.name + ' no se lleno correctamente');
+		if (elem.type == 'radio')
+			if (!elem.checked)
+				alert('El buton de radio ' + elem.name + ' no se selecciono')
+		if (elem.type == 'checkbox')
+			if (!elem.checked)
+				alert('El checkbox ' + elem.name + ' no se selecciono')
+		if (elem.type == 'email') {
+			if (elem.value.indexOf('@') < 1 || elem.value.indexOf('.') < elem.value.indexOf('@') || elem.value.indexOf(' ') > -1 || elem.value.indexOf('.com') < 0 || elem.value.indexOf('.com') < elem.value.indexOf('@'))
+				alert('El correo introducido no es valido');
+		}
+		if (elem.name == 'Dias')
+			if (Meses.selectedIndex == 1)
+				if (Years.options[Years.selectedIndex] % 4 == 0)
+					if (elem.selectedIndex > 28)
+						alert('Dia no valido');
+				else
+					if (elem.selectedIndex > 27)
+						alert('Dia no valido');
+			if (Meses.selectedIndex & 1)
+				if (elem.selectedIndex > 29)
+					alert('Dia no valido');
+			else
+				if (elem.selectedIndex > 30)
+					alert('Dia no valido');
+		}
+		}
+		</script>
+	</body>
+</html>
