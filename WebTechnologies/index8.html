@@ -1,0 +1,37 @@
+ <html>
+ 
+ <head>
+ 
+ </head>
+ <body>
+ <img id="imagen" src="1.jpg" width="300">
+<br>
+ <button id="inicio" onclick="inicio()">Inicio</button>
+<button id="inicio" onclick="retrocede()"><</button>
+<button id="inicio" onclick="avanza()">></button>
+<button id="inicio" onclick="fin()">Fin</button>
+<script>
+	var indice = 1;
+	function retrocede() {
+		if (indice == 1)
+			indice = 16;
+		imagen.src = --indice + '.jpg';
+	}
+	function avanza() {
+		if (indice == 15)
+			indice = 0;
+		imagen.src = ++indice + '.jpg';
+	}
+	
+	function fin() {
+		indice = 15;
+		imagen.src = '15.jpg';
+	}
+	
+	function inicio() {
+		indice = 1;
+		imagen.src = '1.jpg';
+	}
+</script>
+ </body>
+ </html>
