@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>p10</title>
+    </head>
+    <body>
+        <div id="pila"></div>
+        <input type="text" id="elem1">
+        <button onclick="push()">push</button>
+        <button onclick="pop()">pop</button>
+        <div id="cola"></div>
+        <input type="text" id="elem2">
+        <button onclick="insert()">insert</button>
+        <button onclick="remove()">remove</button>
+        <script type="text/javascript">
+            
+            function push() {
+                var newElem = document.createElement('p');
+                var val = document.createTextNode(elem1.value);
+                newElem.append(val);
+                pila.prepend(newElem);
+            }
+
+            function pop() {
+                var elem = pila.firstChild;
+                if (elem == undefined)
+                    alert('pila vacia')
+                else
+                    pila.removeChild(elem);
+            }
+
+            function insert() {
+                var newElem = document.createElement('span');
+                var val = document.createTextNode(elem2.value + ' | ');
+                newElem.append(val);
+                cola.prepend(newElem);
+            }
+
+            function remove() {
+                var elem = cola.lastChild;
+                if (elem == undefined)
+                    alert('cola vacia')
+                else
+                    cola.removeChild(elem);
+            }
+        </script>
+    </body>
+</html>
