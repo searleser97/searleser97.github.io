@@ -26,7 +26,7 @@
 			function drop(ev){
 				ev.preventDefault();
 				ev.target.style.border = "2px dashed #000000";
-				var archivos = event.dataTransfer.files;
+				var archivos = ev.dataTransfer.files;
 				var str = "";
 				for(var i = 0; i < archivos.length; ++i){
 					var archivo = archivos[i];
