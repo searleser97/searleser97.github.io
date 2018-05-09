@@ -1,0 +1,73 @@
+<!doctype html>
+
+<html>
+	<head>
+		<style type="text/css">
+			.destino{
+				width: 300px;
+				height: 300px;
+				border: 2px dashed #000000;
+			}
+		</style>
+		<title>Ejemplo de Drag & Drop</title>
+		<script type="text/javascript">
+			var contador = 0;
+			function add_palabra(palabra){
+				var div = document.createElement("div");
+				div.style.width = "200px";
+				div.style.height = "200px";
+				div.style.border = "2px dashed #000000";
+				div.style.fontSize = "30px";
+				div.style.textAlign = "center";
+				div.style.verticalAlign = "middle";
+				div.style.lineHeight = "200px";
+				div.style.float = "left";
+				div.id = "palabra" + (contador++);
+				div.draggable = "true";
+				div.ondragstart = drag_start;
+				div.ondragenter = drag_enter;
+				div.ondragleave = drag_leave;
+				div.ondragover = allowDrop;
+				div.ondrop = drop;
+				div.innerHTML = palabra;
+				document.getElementById("palabras").appendChild(div);
+			}
+
+			function drag_start(ev){
+				ev.dataTransfer.setData("text", ev.target.id);
+			}
+
+			function allowDrop(ev){
+				ev.preventDefault();
+			}
+
+			function drag_enter(ev){
+				ev.target.style.border = "2px dashed #ff0000";
+			}
+
+			function drag_leave(ev){
+				ev.target.style.border = "2px dashed #000000";
+			}
+
+			function drop(ev){
+				ev.preventDefault();
+				ev.target.style.border = "2px dashed #000000";
+				var div_id = ev.dataTransfer.getData("text");
+				var tmp = ev.target.innerHTML
+				ev.target.innerHTML = document.getElementById(div_id).innerHTML;
+				document.getElementById(div_id).innerHTML = tmp;
+			}
+		</script>
+	</head>
+	<body>
+		<form onsubmit="add_palabra(this.palabra.value); this.reset(); return false;">
+			Introduce una palabra:
+			<input type="text" name="palabra" /><br />
+			<input type="submit" value="Agregar">
+		</form>
+
+		<div id="palabras">
+
+		</div>
+	</body>
+</html>

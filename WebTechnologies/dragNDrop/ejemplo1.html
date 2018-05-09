@@ -1,0 +1,51 @@
+<!doctype html>
+
+<html>
+	<head>
+		<style type="text/css">
+			.destino{
+				width: 300px;
+				height: 300px;
+				border: 2px dashed #000000;
+			}
+		</style>
+		<title>Ejemplo de Drag & Drop</title>
+		<script type="text/javascript">
+			function drag_start(ev){
+				ev.dataTransfer.setData("text", ev.target.id);
+			}
+
+			function allowDrop(ev){
+				ev.preventDefault();
+			}
+
+			function drag_enter(ev){
+				ev.target.style.border = "2px dashed #ff0000";
+			}
+
+			function drag_leave(ev){
+				ev.target.style.border = "2px dashed #000000";
+			}
+
+			function drop(ev){
+				ev.preventDefault();
+				ev.target.style.border = "2px dashed #000000";
+				var img_id = ev.dataTransfer.getData("text");
+				ev.target.removeChild(ev.target.firstChild);
+				ev.target.appendChild(document.getElementById(img_id).cloneNode());
+			}
+		</script>
+	</head>
+	<body>
+		<img width="300" height="300" src="imagen.jpg" id="imagen" draggable="true"
+		ondragstart="drag_start(event)" />
+
+		<div class="destino"
+		ondragenter="drag_enter(event)"
+		ondragleave="drag_leave(event)" 
+		ondragover="allowDrop(event)"
+		ondrop="drop(event)">
+			Arrastra la imagen aqui
+		</div>
+	</body>
+</html>

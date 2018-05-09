@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html>
+	<head>
+		<style type="text/css">
+			#destino{
+				width: 600px;
+				height: 600px;
+				border: 2px dashed #000000;
+			}
+		</style>
+		<title>Ejemplo de Drag & Drop</title>
+		<script type="text/javascript">
+			function allowDrop(ev){
+				ev.preventDefault();
+			}
+
+			function drag_enter(ev){
+				ev.target.style.border = "2px dashed #ff0000";
+			}
+
+			function drag_leave(ev){
+				ev.target.style.border = "2px dashed #000000";
+			}
+
+			function drop(ev){
+				ev.preventDefault();
+				ev.target.style.border = "2px dashed #000000";
+				var archivos = event.dataTransfer.files;
+				var str = "";
+				for(var i = 0; i < archivos.length; ++i){
+					var archivo = archivos[i];
+					str += "<fieldset><legend>" + archivo.name + "</legend>";
+					str += "<b>Nombre</b>: " + archivo.name + "<br />";
+					str += "<b>Tama&ntilde;o</b>: " + archivo.size + " bytes<br />";
+					str += "<b>Tipo</b>: " + archivo.type + "<br />";
+					str += "<b>Fecha de modificaci&oacute;n</b>: " + archivo.lastModifiedDate + "<br />";
+					str += "</fieldset>";
+				}
+				ev.target.innerHTML = str;
+			}
+		</script>
+	</head>
+	<body>
+		<div id="destino"
+		ondragenter="drag_enter(event)"
+		ondragleave="drag_leave(event)" 
+		ondragover="allowDrop(event)"
+		ondrop="drop(event)">
+			Arrastra archivos aqui
+		</div>
+	</body>
+</html>
