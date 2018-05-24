@@ -12,6 +12,10 @@
 		<script type="text/javascript">
 			var partida;
 
+			function sleep(ms) {
+				return new Promise(resolve => setTimeout(resolve, ms));
+			}
+
 			function actualizarTodo(arg){
 				if(partida.playing){
 					document.getElementById("ultima_pila").src = partida.pile.top().url();
@@ -54,8 +58,9 @@
 				partida.onGiveComputerCards = actualizarTodo;
 				partida.onInitialCard = actualizarTodo;
 				partida.onSuccessUser = actualizarTodo;
+				partida.onChangeTurn = actualizarTodo;
 				partida.onIncorrectTurn = actualizarTodo;
-				partida.onWin = actualizarTodo;
+				partida.onIncorrectMove = actualizarTodo;
 				partida.onGameOver = actualizarTodo;
 				partida.onUserDraws = actualizarTodo;
 				partida.onPCDraws = actualizarTodo;
@@ -76,7 +81,7 @@
 		<form name="form_juego" onsubmit="nueva(this.usuario.value); return false;">
 			Nombre de usuario:
 			<input type="text" name="usuario" />
-			<input type="submit" name="btn_jugar" value="Jugar">
+			<input type="submit" name="btn_jugar" value="Jugar" />
 		</form>
 		<div id="juego" style="display: none">
 			<hr>
