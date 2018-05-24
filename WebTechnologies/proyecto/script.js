@@ -45,8 +45,9 @@ function game(user){
 	this.onGiveComputerCards = null;
 	this.onInitialCard = null;
 	this.onSuccessUser = null;
+	this.onChangeTurn = null;
 	this.onIncorrectTurn = null;
-	this.onWin = null;
+	this.onIncorrectMove = null;
 	this.onGameOver = null;
 	this.onUserDraws = null;
 	this.onPCDraws = null;
@@ -109,6 +110,7 @@ function game(user){
 				}
 			}else{
 				console.log("Invalid movement");
+				if(this.onIncorrectMove) this.onIncorrectMove();
 			}
 		}else{
 			//it isn't the user's turn
@@ -164,6 +166,7 @@ function game(user){
 			}
 		}else{
 			console.log("It's not the turn of the PC");
+			if(this.onIncorrectTurn) this.onIncorrectTurn();
 		}
 	}
 }
