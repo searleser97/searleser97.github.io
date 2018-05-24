@@ -128,6 +128,7 @@ function game(user){
 				if(this.onUserDraws) this.onUserDraws();
 			}else if(this.deck.length == 0 && this.pile.top().getValidCards(this.userCards).length == 0){
 				console.log("There is a draw! Nobody wins!");
+				this.playing = false;
 				this.winner = 0;
 				if(this.onGameOver) this.onGameOver();
 			}
