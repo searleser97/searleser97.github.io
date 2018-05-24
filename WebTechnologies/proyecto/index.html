@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Solitario</title>
+		<style type="text/css">
+			img{
+				width: 100px;
+				cursor: pointer;
+			}
+		</style>
+		<script type="text/javascript" src="script.js"></script>
+		<script type="text/javascript">
+			var partida;
+
+			function actualizarTodo(arg){
+				if(partida.playing){
+					document.getElementById("ultima_pila").src = partida.pile.top().url();
+					document.getElementById("disponibles_mazo").innerHTML = partida.deck.length;
+					document.getElementById("disponibles_pila").innerHTML = partida.pile.length;
+					document.getElementById("user_txt").innerHTML = partida.user;
+					document.getElementById("turno_txt").innerHTML = (partida.turn == 1 ? "Es tu turno" : "Es turno de la computadora");
+					actualizarCartas(partida.userCards, "cartas_usuario");
+					actualizarCartas(partida.computerCards, "cartas_pc");
+				}else if(partida.winner != 2){
+					alert("Game over, status: " + partida.winner);
+				}
+			}
+
+			function actualizarCartas(cartas, id){
+				var elem = document.getElementById(id);
+				while(elem.firstChild){
+					elem.removeChild(elem.firstChild);
+				}
+				for(let i = 0; i < cartas.length; ++i){
+					var imagen = document.createElement("img");
+					imagen.src = cartas[i].url();
+					if(id == "cartas_usuario"){
+						imagen.onclick = function(){
+							partida.goUser(i);
+						}
+					}
+					if(cartas[i].matches(partida.pile.top())){
+						imagen.style.border = "5px solid black";
+					}
+					elem.appendChild(imagen);
+				}
+			}
+
+			function nueva(usuario){
+				document.forms["form_juego"].elements["btn_jugar"].enabled = false;
+				document.getElementById("juego").style.display = "";
+				partida = new game(usuario);
+				partida.onGiveUserCards = actualizarTodo;
+				partida.onGiveComputerCards = actualizarTodo;
+				partida.onInitialCard = actualizarTodo;
+				partida.onSuccessUser = actualizarTodo;
+				partida.onIncorrectTurn = actualizarTodo;
+				partida.onWin = actualizarTodo;
+				partida.onGameOver = actualizarTodo;
+				partida.onUserDraws = actualizarTodo;
+				partida.onPCDraws = actualizarTodo;
+				partida.onSuccessPC = actualizarTodo;
+				partida.init();
+			}
+
+			function robar(){
+				partida.drawUser();
+			}
+
+			function pc_juega(){
+				partida.playComputer();
+			}
+		</script>
+	</head>
+	<body>
+		<form name="form_juego" onsubmit="nueva(this.usuario.value); return false;">
+			Nombre de usuario:
+			<input type="text" name="usuario" />
+			<input type="submit" name="btn_jugar" value="Jugar">
+		</form>
+		<div id="juego" style="display: none">
+			<hr>
+			Bienvenido <span id="user_txt"></span>. <span id="turno_txt"></span>
+			<hr>
+			Cartas disponibles en el mazo: <span id="disponibles_mazo"></span>
+			<hr>
+			Última carta de la pila (<span id="disponibles_pila"></span> en total): <br />
+			<img src="" id="ultima_pila" />
+			<hr>
+			Cartas del usuario: <br />
+			<div id="cartas_usuario"></div>
+			<button id="robar_btn" onclick="robar()">Robar</button>
+			<hr>
+			Cartas de la PC: <br />
+			<div id="cartas_pc"></div>
+			<button id="pc_btn" onclick="pc_juega()">Hacer que la computadora haga una tirada</button>
+		</div>
+	</body>
+</html>
