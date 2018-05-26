@@ -202,7 +202,6 @@ function actualizarCartas(cartas, id) {
     }
     for (let i = 0; i < cartas.length; i++) {
         var div = document.createElement("div");
-        div.className = "card";
         var imagen = document.createElement("img");
         imagen.src = cartas[i].url();
         // if (cartas[i].matches(partida.pile.top())) {
@@ -213,12 +212,11 @@ function actualizarCartas(cartas, id) {
             imagen.onclick = function() {
                 partida.goUser(i);
             }
-            if (i != 0)
-                div.style["margin-left"] = "-40px";
-        } else {
-            if (i != cartas.length - 1)
-                div.style["margin-left"] = "-40px";
         }
+        div.style["margin-left"] = "-60px";
+        imagen.style["width"] = "80px";
+        imagen.style["height"] = "120px";
+        imagen.style["display"] = "flex";
         div.appendChild(imagen);
         elem.appendChild(div);
     }

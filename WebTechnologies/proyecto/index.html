@@ -7,27 +7,26 @@
 </head>
 
 <body>
+    <hr> Bienvenido <span id="user_txt"></span>. <span id="turno_txt"></span>
+    <hr> Cartas disponibles en el mazo: <span id="disponibles_mazo"></span>
+    <hr> Última carta de la pila (<span id="disponibles_pila"></span> en total):
     <div class="wrapper">
         <div class="left">
             <div id="juego" style="display: none">
-            	<div class="pc">
-            		<div class="tag"></div>
-            		<div id="cartas_pc"></div>
-            	</div>
-                <hr> Bienvenido <span id="user_txt"></span>. <span id="turno_txt"></span>
-                <hr> Cartas disponibles en el mazo: <span id="disponibles_mazo"></span>
-                <hr> Última carta de la pila (<span id="disponibles_pila"></span> en total):
-                <br />
-                <img src="" id="ultima_pila" />
-                <hr> Cartas del usuario:
-                <br />
+                <div class="pc">
+                    <div class="tag">PC</div>
+                    <div class="cards" id="cartas_pc"></div>
+                </div>
+                <div class="card_queue">
+                	<div class="img">
+                		<img class="card" src="" id="ultima_pila" />
+                	</div>
+                </div>
                 <div class="user">
-                	<div id="cartas_usuario"></div>
-                	<div class="tag"></div>
+                    <div class="cards" id="cartas_usuario"></div>
+                    <div class="tag">searlese</div>
                 </div>
                 <button id="robar_btn" onclick="robar()">Robar</button>
-                <hr> Cartas de la PC:
-                <br />
                 <button id="pc_btn" onclick="pc_juega()">Hacer que la computadora haga una tirada</button>
             </div>
         </div>
