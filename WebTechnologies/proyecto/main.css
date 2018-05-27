@@ -1,6 +1,7 @@
 .wrapper {
     display: flex;
     align-items: center;
+    background-color: silver;
 }
 
 .left {
@@ -12,7 +13,6 @@
     background-size: 100% 100%;
     align-items: center;
     flex-direction: column;
-
 }
 
 .right {
@@ -24,6 +24,7 @@
     align-items: center;
     text-align: center;
     background-color: lightgrey;
+    justify-content: center;
 }
 
 .pc {
@@ -88,7 +89,7 @@
     display: flex;
     width: 80px;
     height: 120px;
-    box-shadow: -2px 7px 46px 2px rgba(0,0,0,0.75);
+    box-shadow: -2px 7px 46px 2px rgba(0, 0, 0, 0.75);
     position: relative;
     /*background-color: grey;*/
 }
@@ -125,7 +126,50 @@
     font-size: 30px;
     background-color: red;
     border-radius: 50%;
-    background-color: rgba(44, 47, 51, 0.9);
-    padding: 10px;
+    background-color: rgba(44, 47, 51, 0.7);
+    padding: 15px;
     margin: 10px;
+}
+
+table.paleBlueRows {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    border: 1px solid #FFFFFF;
+    text-align: center;
+    width: 100%;
+}
+
+table.paleBlueRows td,
+table.paleBlueRows th {}
+
+table.paleBlueRows tbody td {
+    /*font-size: 13px;*/
+}
+
+table.paleBlueRows tr:nth-child(even) {
+    background: #D0E4F5;
+}
+
+table.paleBlueRows thead {
+    background: #0B6FA4;
+    border-bottom: 5px solid #FFFFFF;
+    color: whitesmoke;
+}
+
+table.paleBlueRows thead th {
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 2px solid #FFFFFF;
+}
+
+table.paleBlueRows thead th:first-child {
+    border-left: none;
+}
+
+table.paleBlueRows tfoot td {
+    font-size: 14px;
+}
+
+#juego {
+    width: 100%;
 }

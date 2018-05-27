@@ -1,3 +1,10 @@
+var db = openDatabase('uno', '1.0', 'my first database', 2 * 1024 * 1024);
+db.transaction(function(tx) {
+    // tx.executeSql('drop table scores');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS scores (username unique, wins int(11) default 0, losses int(11) default 0)');
+});
+var users = {};
+
 function rnd(a, b) {
     return Math.floor(a + Math.random() * (b - a + 1));
 }
@@ -103,6 +110,20 @@ function game(user) {
                     this.playing = false;
                     this.winner = 1;
                     if (this.onGameOver) this.onGameOver();
+                    if (users[user] == undefined)
+                        users[user] = [0, 0];
+                    db.transaction(function(tx) {
+                        tx.executeSql('update scores set wins=? where username=?', [users[user][0] + 1, user]);
+                    });
+                    db.transaction(function(tx) {
+                        tx.executeSql('insert into scores (username, wins) values (?, ?)', [user, users[user][0] + 1]);
+                    });
+                    db.transaction(function(tx) {
+                        tx.executeSql('update scores set losses=? where username=?', [users[user][1] + 1, 'pc']);
+                    });
+                    db.transaction(function(tx) {
+                        tx.executeSql('insert into scores (username, losses) values (?, ?)', ['pc', users[user][1] + 1]);
+                    });
                 } else {
                     //now it's pc's turn
                     this.turn *= -1;
@@ -161,6 +182,20 @@ function game(user) {
                 this.playing = false;
                 this.winner = -1;
                 if (this.onGameOver) this.onGameOver();
+                if (users[user] == undefined)
+                    users[user] = [0, 0];
+                db.transaction(function(tx) {
+                    tx.executeSql('update scores set wins=? where username=?', [users[user][0] + 1, 'pc']);
+                });
+                db.transaction(function(tx) {
+                    tx.executeSql('insert into scores (username, wins) values (?, ?)', ['pc', users[user][0] + 1]);
+                });
+                db.transaction(function(tx) {
+                    tx.executeSql('update scores set losses=? where username=?', [users[user][1] + 1, user]);
+                });
+                db.transaction(function(tx) {
+                    tx.executeSql('insert into scores (username, losses) values (?, ?)', [user, users[user][1] + 1]);
+                });
             } else {
                 this.turn *= -1;
                 if (this.onChangeTurn) this.onChangeTurn();
@@ -202,7 +237,7 @@ function actualizarCartas(cartas, id) {
     }
     for (let i = 0; i < cartas.length; i++) {
         var div = document.createElement("div");
-        
+
         // if (cartas[i].matches(partida.pile.top())) {
         //     imagen.style.border = "5px solid black";
         // }
@@ -257,3 +292,33 @@ function pc_juega() {
 }
 
 nueva('searleser');
+
+
+
+function load_scores() {
+    db.transaction(function(tx) {
+        tx.executeSql('select * from scores', [], function(tx1, results) {
+            var len = results.rows.length;
+            for (var i = 0; i < len; i++) {
+                var row = scores.insertRow();
+                var cell1 = row.insertCell();
+                var cell2 = row.insertCell();
+                var cell3 = row.insertCell();
+                cell1.innerHTML = results.rows[i].username;
+                cell2.innerHTML = results.rows[i].wins;
+                cell3.innerHTML = results.rows[i].losses;
+                users[results.rows[i].username] = [results.rows[i].wins, results.rows[i].losses];
+            }
+            var header = scores.createTHead();
+            var row = header.insertRow();
+            var c1 = row.insertCell();
+            var c2 = row.insertCell();
+            var c3 = row.insertCell();
+            c1.innerHTML = 'Usuario';
+            c2.innerHTML = 'Victorias';
+            c3.innerHTML = 'Derrotas';
+        });
+    });
+}
+
+load_scores();
