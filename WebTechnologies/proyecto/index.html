@@ -31,16 +31,18 @@
         <div class="right">
             <form name="form_juego" id="forma" onsubmit="nueva(this.usuario.value); return false;">
                 Nombre de usuario:
-                <input type="text" name="usuario" />
-                <input type="submit" name="btn_jugar" value="Jugar" />
+                <input type="text" class="usernameTxt" name="usuario" />
+                <input type="submit" class="usernameButton" name="btn_jugar" value="Jugar" />
             </form>
             <div id="juego" style="display: none;">
                 <span id="turno_txt"></span>
                 <br> Cartas disponibles en el mazo: <span id="disponibles_mazo"></span>
                 <br> Última carta de la pila (<span id="disponibles_pila"></span> en total):
-                <table class="paleBlueRows" align="center" id="scores">
                 </table>
                 <div class="options"></div>
+            </div>
+            <div class="records">
+                <table class="paleBlueRows" align="center" id="scores">
             </div>
         </div>
     </div>

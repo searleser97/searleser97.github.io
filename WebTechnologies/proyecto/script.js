@@ -291,10 +291,6 @@ function pc_juega() {
     partida.playComputer();
 }
 
-nueva('searleser');
-
-
-
 function load_scores() {
     db.transaction(function(tx) {
         tx.executeSql('select * from scores', [], function(tx1, results) {
@@ -320,5 +316,7 @@ function load_scores() {
         });
     });
 }
+
+// nueva('searleser');
 
 load_scores();
