@@ -245,7 +245,7 @@ function actualizarCartas(cartas, id) {
         if (id == "cartas_usuario") {
             div.onclick = function() {
                 partida.goUser(i);
-                setTimeout(function(){
+                setTimeout(function() {
                     partida.playComputer();
                 }, 1000);
             }
@@ -284,6 +284,9 @@ function nueva(usuario) {
     partida.onPCDraws = actualizarTodo;
     partida.onSuccessPC = actualizarTodo;
     partida.init();
+    db.transaction(function(tx) {
+        tx.executeSql('insert into scores (username, wins, losses) values (?, ?, ?)', [usuario, 0, 0]);
+    });
 }
 
 function robar() {
