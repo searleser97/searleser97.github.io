@@ -1,5 +1,6 @@
 .wrapper {
     display: flex;
+    align-items: center;
 }
 
 .left {
@@ -9,7 +10,6 @@
     background-image: url('wallpapers/wallpaper1.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
-
     align-items: center;
     flex-direction: column;
 
@@ -20,6 +20,10 @@
     width: 35%;
     height: 100%;
     background-color: blue;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: lightgrey;
 }
 
 .pc {
@@ -33,7 +37,6 @@
 .pc .tag {
     display: flex;
     width: 30%;
-    height: 100%;
     color: white;
     align-items: center;
     justify-content: center;
@@ -60,7 +63,6 @@
 .user .tag {
     display: flex;
     width: 30%;
-    height: 100%;
     /*background-color: pink;*/
     align-items: center;
     justify-content: center;
@@ -113,4 +115,17 @@
     color: white;
     align-items: center;
     text-align: center;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.tag {
+    /*font-family: "Comic Sans MS", cursive, sans-serif;*/
+    font-family: Impact, Charcoal, sans-serif;
+    /*font-weight: bold;*/
+    font-size: 30px;
+    background-color: red;
+    border-radius: 50%;
+    background-color: rgba(44, 47, 51, 0.9);
+    padding: 10px;
+    margin: 10px;
 }

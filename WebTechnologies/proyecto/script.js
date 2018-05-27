@@ -202,35 +202,37 @@ function actualizarCartas(cartas, id) {
     }
     for (let i = 0; i < cartas.length; i++) {
         var div = document.createElement("div");
-        var imagen = document.createElement("img");
-        div.className = "card";
-        imagen.src = cartas[i].url();
+        
         // if (cartas[i].matches(partida.pile.top())) {
         //     imagen.style.border = "5px solid black";
         // }
 
         if (id == "cartas_usuario") {
-            imagen.onclick = function() {
+            div.onclick = function() {
                 partida.goUser(i);
             }
         }
+        div.style["background-image"] = "url('" + cartas[i].url() + "')";
+        div.style["background-repeat"] = "no-repeat";
+        div.style["background-size"] = "100% 100%";
         div.style["margin-left"] = "-60px";
-        imagen.style["width"] = "80px";
-        imagen.style["height"] = "120px";
-        imagen.style["display"] = "flex";
-        imagen.style["box-shadow"] = " -5px 7px 34px -5px rgba(0,0,0,0.75)";
-        div.appendChild(imagen);
+        div.style["cursor"] = "pointer";
+        div.style["width"] = "80px";
+        div.style["height"] = "120px";
+        div.style["display"] = "flex";
+        div.style["box-shadow"] = " -5px 7px 34px -5px rgba(0,0,0,0.75)";
         elem.appendChild(div);
         if (partida.deck.length > 0)
             mazo.src = partida.deck[partida.deck.length - 1].url();
         else
-            mazo.src = "";
+            mazo.src = "wallpapers/wallpaper2.jpg";
     }
 }
 
 function nueva(usuario) {
     document.forms["form_juego"].elements["btn_jugar"].enabled = false;
     document.getElementById("juego").style.display = "";
+    forma.style["display"] = "none";
     partida = new game(usuario);
     partida.onGiveUserCards = actualizarTodo;
     partida.onGiveComputerCards = actualizarTodo;

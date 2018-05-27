@@ -8,39 +8,41 @@
 
 <body>
     <div class="wrapper">
-        <div id="juego" class="left" style="display: none">
+        <div class="left">
             <div class="pc">
                 <div class="tag">PC</div>
                 <div class="cards" id="cartas_pc"></div>
             </div>
             <div class="card_queue">
                 <div class="img">
-                    <img class="card" src="" id="mazo" />
+                    <img class="card" src="deck/1_3.png" id="mazo" />
                     <div id="robar_btn" class="robar" onclick="robar()">Robar</div>
                 </div>
                 <div class="img">
-                    <img class="card" src="" id="ultima_pila" />
+                    <img class="card" src="wallpapers/wallpaper2.jpg" id="ultima_pila" />
                 </div>
             </div>
             <div class="user">
                 <div class="cards" id="cartas_usuario"></div>
-                <div class="tag">searlese</div>
+                <div class="tag"><span id="user_txt"></span></div>
             </div>
-            
             <button id="pc_btn" onclick="pc_juega()">Hacer que la computadora haga una tirada</button>
         </div>
         <div class="right">
-        	Bienvenido . <span id="turno_txt"></span> Cartas disponibles en el mazo: <span id="disponibles_mazo"></span> Última carta de la pila (<span id="disponibles_pila"></span> en total):
-            <div class="username">
-            	<span id="user_txt"></span>
-            </div>
-            <div class="scores"></div>
-            <div class="options"></div>
-            <form name="form_juego" onsubmit="nueva(this.usuario.value); return false;">
+            <form name="form_juego" id="forma" onsubmit="nueva(this.usuario.value); return false;">
                 Nombre de usuario:
                 <input type="text" name="usuario" />
                 <input type="submit" name="btn_jugar" value="Jugar" />
             </form>
+            <div id="juego" style="display: none;">
+                <span id="turno_txt"></span>
+				<br>
+                Cartas disponibles en el mazo: <span id="disponibles_mazo"></span>
+                <br>
+                Última carta de la pila (<span id="disponibles_pila"></span> en total):
+                <div class="scores"></div>
+                <div class="options"></div>
+            </div>
         </div>
     </div>
     <script type="text/javascript" src="script.js"></script>
