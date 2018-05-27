@@ -245,6 +245,9 @@ function actualizarCartas(cartas, id) {
         if (id == "cartas_usuario") {
             div.onclick = function() {
                 partida.goUser(i);
+                setTimeout(function(){
+                    partida.playComputer();
+                }, 1000);
             }
         }
         div.style["background-image"] = "url('" + cartas[i].url() + "')";
