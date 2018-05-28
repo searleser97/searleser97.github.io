@@ -242,4 +242,8 @@ table.paleBlueRows tfoot td {
   bottom: 0;
   right: 0;
   left: 0;
+  background-image: url('wallpapers/error.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: none;
 }

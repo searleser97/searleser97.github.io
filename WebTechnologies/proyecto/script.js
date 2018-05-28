@@ -242,7 +242,7 @@ function actualizarCartas(cartas, id) {
             div.ondragstart = function(ev) {
                 ev.dataTransfer.setData("text", i);
                 if(!partida.userCards[i].matches(partida.pile.top())){
-                    incorrecto.style["background-color"] = "red";
+                    incorrecto.style.display = "block";
                 }
             };
             div.onmouseover = function() {
@@ -252,7 +252,7 @@ function actualizarCartas(cartas, id) {
                 this.style["z-index"] = i;
             }
             div.ondragend = function(ev) {
-                incorrecto.style["background-color"] = "transparent";
+                incorrecto.style.display = "none";
             }
         }
         div.style["background-image"] = "url('" + cartas[i].url() + "')";
@@ -349,7 +349,7 @@ document.getElementById("ultimaPila").ondragover = function(ev) {
 
 document.getElementById("ultimaPila").ondrop = function(ev) {
     ev.preventDefault();
-    if(partida.goUser(ev.dataTransfer.getData("text")))
+    if(partida.goUser(ev.dataTransfer.getData("text")) || partida.winner == 2)
         setTimeout(function() {
             partida.playComputer();
         }, 1000);
