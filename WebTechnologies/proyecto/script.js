@@ -132,12 +132,15 @@ function game(user) {
             } else {
                 console.log("Invalid movement");
                 if (this.onIncorrectMove) this.onIncorrectMove();
+                return false;
             }
         } else {
             //it isn't the user's turn
             console.log("It is not your turn " + this.user + "!");
             if (this.onIncorrectTurn) this.onIncorrectTurn();
+            return false;
         }
+        return true;
     }
 
     //the user draws one card from the deck
@@ -212,10 +215,6 @@ function game(user) {
 
 var partida;
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 function actualizarTodo(arg) {
     if (partida.playing) {
         document.getElementById("ultima_pila").src = partida.pile.top().url();
@@ -238,27 +237,34 @@ function actualizarCartas(cartas, id) {
     for (let i = 0; i < cartas.length; i++) {
         var div = document.createElement("div");
 
-        // if (cartas[i].matches(partida.pile.top())) {
-        //     imagen.style.border = "5px solid black";
-        // }
-
         if (id == "cartas_usuario") {
-            div.onclick = function() {
-                partida.goUser(i);
-                setTimeout(function() {
-                    partida.playComputer();
-                }, 1000);
+            div.draggable = true;
+            div.ondragstart = function(ev) {
+                ev.dataTransfer.setData("text", i);
+                if(!partida.userCards[i].matches(partida.pile.top())){
+                    incorrecto.style["background-color"] = "red";
+                }
+            };
+            div.onmouseover = function() {
+                this.style["z-index"] = "100";
+            };
+            div.onmouseout = function() {
+                this.style["z-index"] = i;
+            }
+            div.ondragend = function(ev) {
+                incorrecto.style["background-color"] = "transparent";
             }
         }
         div.style["background-image"] = "url('" + cartas[i].url() + "')";
         div.style["background-repeat"] = "no-repeat";
         div.style["background-size"] = "100% 100%";
-        div.style["margin-left"] = "-60px";
+        div.style["margin-left"] = "-50px";
         div.style["cursor"] = "pointer";
         div.style["width"] = "80px";
         div.style["height"] = "120px";
         div.style["display"] = "flex";
         div.style["box-shadow"] = " -5px 7px 34px -5px rgba(0,0,0,0.75)";
+        div.style["z-index"] = i;
         elem.appendChild(div);
         if (partida.deck.length > 0)
             mazo.src = partida.deck[partida.deck.length - 1].url();
@@ -278,7 +284,6 @@ function nueva(usuario) {
     partida.onSuccessUser = actualizarTodo;
     partida.onChangeTurn = actualizarTodo;
     partida.onIncorrectTurn = actualizarTodo;
-    partida.onIncorrectMove = actualizarTodo;
     partida.onGameOver = actualizarTodo;
     partida.onUserDraws = actualizarTodo;
     partida.onPCDraws = actualizarTodo;
@@ -323,6 +328,29 @@ function load_scores() {
     });
 }
 
-// nueva('searleser');
+/// nueva('searleser');
 
 load_scores();
+
+document.getElementById("ultimaPila").ondragenter = function(ev) {
+    ev.preventDefault();
+    //
+}
+
+document.getElementById("ultimaPila").ondragleave = function(ev) {
+    ev.preventDefault();
+    //
+}
+
+document.getElementById("ultimaPila").ondragover = function(ev) {
+    ev.preventDefault();
+    //
+}
+
+document.getElementById("ultimaPila").ondrop = function(ev) {
+    ev.preventDefault();
+    if(partida.goUser(ev.dataTransfer.getData("text")))
+        setTimeout(function() {
+            partida.playComputer();
+        }, 1000);
+}
