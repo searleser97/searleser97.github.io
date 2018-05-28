@@ -349,7 +349,7 @@ document.getElementById("ultimaPila").ondragover = function(ev) {
 
 document.getElementById("ultimaPila").ondrop = function(ev) {
     ev.preventDefault();
-    if(partida.goUser(ev.dataTransfer.getData("text")) || partida.winner == 2)
+    if(partida.goUser(ev.dataTransfer.getData("text")) && partida.winner == 2)
         setTimeout(function() {
             partida.playComputer();
         }, 1000);
