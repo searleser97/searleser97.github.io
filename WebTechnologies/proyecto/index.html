@@ -2,8 +2,9 @@
 <html>
 
 <head>
-    <title>UNO</title>
+    <title>Solitario</title>
     <link rel="stylesheet" href="main.css">
+    <meta charset="utf-8">
 </head>
 
 <body>
@@ -31,18 +32,57 @@
         <div class="right">
             <form name="form_juego" id="forma" onsubmit="nueva(this.usuario.value); return false;">
                 Nombre de usuario:
-                <input type="text" class="usernameTxt" name="usuario" />
+                <input required="required" type="text" class="usernameTxt" name="usuario" />
                 <input type="submit" class="usernameButton" name="btn_jugar" value="Jugar" />
             </form>
             <div id="juego" style="display: none;">
                 <span id="turno_txt"></span>
-                <br> Cartas disponibles en el mazo: <span id="disponibles_mazo"></span>
-                <br> Última carta de la pila (<span id="disponibles_pila"></span> en total):
-                </table>
-                <div class="options"></div>
+                <hr />
+                Cartas disponibles en el mazo: <span id="disponibles_mazo"></span>
+                <hr />
+                Cartas en la pila de descarte: <span id="disponibles_pila"></span>
+                <hr />
             </div>
+            <ul class="options" id="options">
+                <li><a onclick="location.reload()">Nuevo juego</a></li>
+                <li><a onclick="instrucciones()">Mostrar instrucciones</a></li>
+            </ul>
             <div class="records">
-                <table class="paleBlueRows" align="center" id="scores">
+                <table class="paleBlueRows" align="center" id="scores"></table>
+            </div>
+        </div>
+    </div>
+    <footer>
+        Copyright &copy; 2018.<br />
+        Ontiveros Salazar Alan Enrique, Sánchez Valencia Sergio Gabriel
+    </footer>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" id="cerrar">&times;</span>
+                <h2>Instrucciones</h2>
+            </div>
+            <div class="modal-body">
+                ¡Bienvenido al juego de Solitario! Esperamos que te diviertas. Las instrucciones son las siguientes, son muy fáciles:
+                <ul>
+                    <li>La baraja completa consiste de 52 cartas distintas. Cada carta tiene una figura y un número.</li>
+                    <ul>
+                        <li>La figura puede ser: <b>corazón</b>, <b>diamante</b>, <b>pica</b> o <b>trébol</b>.</li>
+                        <li>El número puede ser entre 2 y 10, <b>As</b>, <b>Jota</b>, <b>Q (Reina)</b> y <b>K (Rey)</b>.</li>
+                    </ul>
+                    <li>Al principio se revuelve toda la baraja y te repartimos tres cartas a ti y a la computadora.</li>
+                    <li>Se coloca la última carta del mazo de cartas a la pila de descarte, para comenzar el juego.</li>
+                    <li>Los turnos son alternados, tú comienzas.</li>
+                    <li>Un turno consiste en arrastrar una carta que tengas a la pila, y si es válida, la puedes descartar. Una carta es válida si:</li>
+                    <ul>
+                        <li>Es del mismo número.</li>
+                        <li>Es del mismo tipo.</li>
+                    </ul>
+                    <li>En caso de que no tengas ninguna carta válida, tendrás que robar del mazo de cartas hasta que te salga una carta válida, la cuál ya podrás descartar, quedándote con todas las que robaste anteriormente.</li>
+                    <li>La computadora hará lo mismo que tú cuando le toque tirar, solo que de forma automática.</li>
+                    <li>Gana el primer jugador que se deshaga de todas sus cartas.</li>
+                    <li>Si se acaba el mazo de cartas y nadie ha ganado, se considera como empate.</li>
+                </ul>
             </div>
         </div>
     </div>

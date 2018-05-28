@@ -112,6 +112,8 @@ function game(user) {
                     if (this.onGameOver) this.onGameOver();
                     if (users[user] == undefined)
                         users[user] = [0, 0];
+                    if (users['pc'] == undefined)
+                        users['pc'] = [0, 0];
                     db.transaction(function(tx) {
                         tx.executeSql('update scores set wins=? where username=?', [users[user][0] + 1, user]);
                     });
@@ -221,11 +223,14 @@ function actualizarTodo(arg) {
         document.getElementById("disponibles_mazo").innerHTML = partida.deck.length;
         document.getElementById("disponibles_pila").innerHTML = partida.pile.length;
         document.getElementById("user_txt").innerHTML = partida.user;
-        document.getElementById("turno_txt").innerHTML = (partida.turn == 1 ? "Es tu turno" : "Es turno de la computadora");
+        document.getElementById("turno_txt").innerHTML = (partida.turn == 1 ? "Es tu turno " + partida.user : "Es turno de la computadora");
         actualizarCartas(partida.userCards, "cartas_usuario");
         actualizarCartas(partida.computerCards, "cartas_pc");
     } else if (partida.winner != 2) {
-        alert("Game over, status: " + partida.winner);
+        if(partida.winner == 0)
+            juego.innerHTML = "<h1>¡Empate!</h1>";
+        else
+            juego.innerHTML = "<h1>¡" + (partida.winner == 1 ? partida.user : "PC") + " gana!</h1>";
     }
 }
 
@@ -247,6 +252,8 @@ function actualizarCartas(cartas, id) {
             };
             div.onmouseover = function() {
                 this.style["z-index"] = "100";
+                var audio = new Audio("sounds/pick.mp3");
+                audio.play();
             };
             div.onmouseout = function() {
                 this.style["z-index"] = i;
@@ -274,7 +281,7 @@ function actualizarCartas(cartas, id) {
 }
 
 function nueva(usuario) {
-    document.forms["form_juego"].elements["btn_jugar"].enabled = false;
+    document.getElementById("options").style.display = "block";
     document.getElementById("juego").style.display = "";
     forma.style["display"] = "none";
     partida = new game(usuario);
@@ -353,4 +360,19 @@ document.getElementById("ultimaPila").ondrop = function(ev) {
         setTimeout(function() {
             partida.playComputer();
         }, 1000);
+}
+
+
+function instrucciones(){
+    modal.style.display = "block";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+cerrar.onclick = function() {
+    modal.style.display = "none";
 }
