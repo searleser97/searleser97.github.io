@@ -105,12 +105,12 @@ function game(user) {
                 var c = this.userCards.splice(indexCard, 1)[0];
                 this.pile.push(c);
                 console.log("Successfull play from the user");
-                if (this.onSuccessUser) this.onSuccessUser();
+                // if (this.onSuccessUser) this.onSuccessUser();
                 if (this.userCards.length == 0) {
                     console.log(user + " wins!");
                     this.playing = false;
                     this.winner = 1;
-                    if (this.onGameOver) this.onGameOver();
+                    // if (this.onGameOver) this.onGameOver();
                     if (users[user] == undefined)
                         users[user] = [0, 0];
                     if (users['pc'] == undefined)
@@ -130,17 +130,17 @@ function game(user) {
                 } else {
                     //now it's pc's turn
                     this.turn *= -1;
-                    if (this.onChangeTurn) this.onChangeTurn();
+                    // if (this.onChangeTurn) this.onChangeTurn();
                 }
             } else {
                 console.log("Invalid movement");
-                if (this.onIncorrectMove) this.onIncorrectMove();
+                // if (this.onIncorrectMove) this.onIncorrectMove();
                 return false;
             }
         } else {
             //it isn't the user's turn
             console.log("It is not your turn " + this.user + "!");
-            if (this.onIncorrectTurn) this.onIncorrectTurn();
+            // if (this.onIncorrectTurn) this.onIncorrectTurn();
             return false;
         }
         return true;
@@ -161,12 +161,13 @@ function game(user) {
             }
         } else {
             console.log("It is not your turn " + this.user + "!");
-            if (this.onIncorrectTurn) this.onIncorrectTurn();
+            // if (this.onIncorrectTurn) this.onIncorrectTurn();
         }
     }
 
     //the computer wants to play
-    this.playComputer = async function() {
+    this.playComputer = function() {
+        var pcChosenCardId = undefined;
         if (this.turn == -1) {
             var positions = this.pile.top().getValidCards(this.computerCards);
             while (this.deck.length > 0 && positions.length == 0) {
@@ -181,12 +182,9 @@ function game(user) {
                 var pos = positions.popRandom();
                 var pcChosenCard = this.computerCards.splice(pos, 1)[0];
                 this.pile.push(pcChosenCard);
-                var cardElem = document.getElementById(pcChosenCard.id);
-                cardElem.classList.add("trans");
+                pcChosenCardId = pcChosenCard.id;
                 console.log("Successfull play from the PC");
-                await sleep(1000);
-                // alert(pcChosenCard.id);
-                if (this.onSuccessPC) this.onSuccessPC(pos);
+                // this.onSuccessPC(pos);
             }
             if (this.computerCards.length == 0) {
                 console.log("PC wins!");
@@ -209,12 +207,13 @@ function game(user) {
                 });
             } else {
                 this.turn *= -1;
-                if (this.onChangeTurn) this.onChangeTurn();
+                // if (this.onChangeTurn) this.onChangeTurn();
             }
         } else {
             console.log("It's not the turn of the PC");
-            if (this.onIncorrectTurn) this.onIncorrectTurn();
+            // if (this.onIncorrectTurn) this.onIncorrectTurn();
         }
+        return pcChosenCardId;
     }
 }
 
@@ -233,7 +232,7 @@ function actualizarTodo(arg) {
         actualizarCartas(partida.userCards, "cartas_usuario");
         actualizarCartas(partida.computerCards, "cartas_pc");
     } else if (partida.winner != 2) {
-        if(partida.winner == 0)
+        if (partida.winner == 0)
             juego.innerHTML = "<h1>¡Empate!</h1>";
         else
             juego.innerHTML = "<h1>¡" + (partida.winner == 1 ? partida.user : "PC") + " gana!</h1>";
@@ -252,7 +251,7 @@ function actualizarCartas(cartas, id) {
             div.draggable = true;
             div.ondragstart = function(ev) {
                 ev.dataTransfer.setData("text", i);
-                if(!partida.userCards[i].matches(partida.pile.top())){
+                if (!partida.userCards[i].matches(partida.pile.top())) {
                     incorrecto.style.display = "block";
                 }
             };
@@ -353,16 +352,69 @@ document.getElementById("ultimaPila").ondragover = function(ev) {
     //
 }
 
+var pcChosenCardPos = { top: 0, left: 0 };
+var deckOffSets = ultimaPila.getBoundingClientRect();
+var clone = undefined;
+var animation;
+
+var pcTop, pcLeft, deckTop, deckLeft;
+
+function movePcCard() {
+    console.log('deck top, left: ' + deckTop + ' ' + deckLeft);
+    console.log('pc top, left: ' + pcTop + ' ' + pcLeft);
+    if (pcTop == deckTop && pcLeft == deckLeft) {
+        actualizarTodo(0);
+        document.body.removeChild(clone);
+        clearInterval(animation);
+        return;
+    }
+    if (pcTop != deckTop)
+        pcTop++;
+    if (pcLeft != deckLeft) {
+        if (pcLeft < deckLeft)
+            pcLeft++;
+        else
+            pcLeft--;
+    }
+    clone.style['top'] = pcTop + 'px';
+    clone.style['left'] = pcLeft + 'px';
+}
+
 document.getElementById("ultimaPila").ondrop = function(ev) {
     ev.preventDefault();
-    if(partida.goUser(ev.dataTransfer.getData("text")) && partida.winner == 2)
+    if (partida.goUser(ev.dataTransfer.getData("text")) && partida.winner == 2) {
+        actualizarTodo(0);
+        pcChosenCardId = partida.playComputer();
         setTimeout(function() {
-            partida.playComputer();
+            if (pcChosenCardId != undefined) {
+                var pcChosenCardDiv = document.getElementById(pcChosenCardId);
+                var deckPos = ultimaPila.getBoundingClientRect();
+                var pcChosenCardPos = pcChosenCardDiv.getBoundingClientRect();
+                deckLeft = Math.floor(deckPos.left + 50);
+                deckTop = Math.floor(deckPos.top);
+                pcLeft = Math.floor(pcChosenCardPos.left);
+                pcTop = Math.floor(pcChosenCardPos.top);
+
+                clone = pcChosenCardDiv.cloneNode();
+
+                pcChosenCardDiv.style['opacity'] = '0';
+
+                clone.style['position'] = 'fixed';
+                clone.style['top'] = pcTop + 'px';
+                clone.style['left'] = pcLeft + 'px';
+                clone.style['border'] = '2px solid red';
+                clone.style['z-index'] = '100';
+                clone.id = 'pcChosenCard';
+
+                document.body.appendChild(clone);
+                animation = setInterval(movePcCard, 5);
+            }
         }, 1000);
+    }
 }
 
 
-function instrucciones(){
+function instrucciones() {
     modal.style.display = "block";
 }
 
@@ -377,5 +429,5 @@ cerrar.onclick = function() {
 }
 
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
