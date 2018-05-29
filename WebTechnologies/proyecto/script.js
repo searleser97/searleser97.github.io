@@ -20,6 +20,7 @@ Array.prototype.popRandom = function() {
 function card(tipo, numero) {
     this.tipo = tipo;
     this.numero = numero;
+    this.id = "card_" + tipo + "_" + numero;
     this.matches = function(cartaB) {
         return this.tipo == cartaB.tipo || this.numero == cartaB.numero;
     }
@@ -121,10 +122,10 @@ function game(user) {
                         tx.executeSql('insert into scores (username, wins) values (?, ?)', [user, users[user][0] + 1]);
                     });
                     db.transaction(function(tx) {
-                        tx.executeSql('update scores set losses=? where username=?', [users[user][1] + 1, 'pc']);
+                        tx.executeSql('update scores set losses=? where username=?', [users['pc'][1] + 1, 'pc']);
                     });
                     db.transaction(function(tx) {
-                        tx.executeSql('insert into scores (username, losses) values (?, ?)', ['pc', users[user][1] + 1]);
+                        tx.executeSql('insert into scores (username, losses) values (?, ?)', ['pc', users['pc'][1] + 1]);
                     });
                 } else {
                     //now it's pc's turn
@@ -165,7 +166,7 @@ function game(user) {
     }
 
     //the computer wants to play
-    this.playComputer = function() {
+    this.playComputer = async function() {
         if (this.turn == -1) {
             var positions = this.pile.top().getValidCards(this.computerCards);
             while (this.deck.length > 0 && positions.length == 0) {
@@ -178,8 +179,13 @@ function game(user) {
             }
             if (positions.length > 0) {
                 var pos = positions.popRandom();
-                this.pile.push(this.computerCards.splice(pos, 1)[0]);
+                var pcChosenCard = this.computerCards.splice(pos, 1)[0];
+                this.pile.push(pcChosenCard);
+                var cardElem = document.getElementById(pcChosenCard.id);
+                cardElem.classList.add("trans");
                 console.log("Successfull play from the PC");
+                await sleep(1000);
+                // alert(pcChosenCard.id);
                 if (this.onSuccessPC) this.onSuccessPC(pos);
             }
             if (this.computerCards.length == 0) {
@@ -190,10 +196,10 @@ function game(user) {
                 if (users[user] == undefined)
                     users[user] = [0, 0];
                 db.transaction(function(tx) {
-                    tx.executeSql('update scores set wins=? where username=?', [users[user][0] + 1, 'pc']);
+                    tx.executeSql('update scores set wins=? where username=?', [users['pc'][0] + 1, 'pc']);
                 });
                 db.transaction(function(tx) {
-                    tx.executeSql('insert into scores (username, wins) values (?, ?)', ['pc', users[user][0] + 1]);
+                    tx.executeSql('insert into scores (username, wins) values (?, ?)', ['pc', users['pc'][0] + 1]);
                 });
                 db.transaction(function(tx) {
                     tx.executeSql('update scores set losses=? where username=?', [users[user][1] + 1, user]);
@@ -241,7 +247,7 @@ function actualizarCartas(cartas, id) {
     }
     for (let i = 0; i < cartas.length; i++) {
         var div = document.createElement("div");
-
+        div.id = cartas[i].id;
         if (id == "cartas_usuario") {
             div.draggable = true;
             div.ondragstart = function(ev) {
@@ -263,15 +269,8 @@ function actualizarCartas(cartas, id) {
             }
         }
         div.style["background-image"] = "url('" + cartas[i].url() + "')";
-        div.style["background-repeat"] = "no-repeat";
-        div.style["background-size"] = "100% 100%";
-        div.style["margin-left"] = "-50px";
-        div.style["cursor"] = "pointer";
-        div.style["width"] = "80px";
-        div.style["height"] = "120px";
-        div.style["display"] = "flex";
-        div.style["box-shadow"] = " -5px 7px 34px -5px rgba(0,0,0,0.75)";
         div.style["z-index"] = i;
+        div.classList.add("players_cards");
         elem.appendChild(div);
         if (partida.deck.length > 0)
             mazo.src = partida.deck[partida.deck.length - 1].url();
@@ -375,4 +374,8 @@ window.onclick = function(event) {
 
 cerrar.onclick = function() {
     modal.style.display = "none";
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
