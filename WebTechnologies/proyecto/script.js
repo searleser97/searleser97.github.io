@@ -366,6 +366,21 @@ function movePcCard() {
     clone.style['left'] = pcLeft + 'px';
 }
 
+document.getElementById("ultimaPila").ondragenter = function(ev) {
+    ev.preventDefault();
+    //
+}
+
+document.getElementById("ultimaPila").ondragleave = function(ev) {
+    ev.preventDefault();
+    //
+}
+
+document.getElementById("ultimaPila").ondragover = function(ev) {
+    ev.preventDefault();
+    //
+}
+
 document.getElementById("ultimaPila").ondrop = function(ev) {
     ev.preventDefault();
     if (partida.goUser(ev.dataTransfer.getData("text")) && partida.winner == 2) {
