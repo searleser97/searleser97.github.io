@@ -53,13 +53,9 @@ function game(user) {
     this.onGiveComputerCards = null;
     this.onInitialCard = null;
     this.onSuccessUser = null;
-    this.onChangeTurn = null;
-    this.onIncorrectTurn = null;
-    this.onIncorrectMove = null;
     this.onGameOver = null;
     this.onUserDraws = null;
     this.onPCDraws = null;
-    this.onSuccessPC = null;
 
     //create the 52 cards
     for (var i = 0; i < 4; ++i) {
@@ -130,17 +126,14 @@ function game(user) {
                 } else {
                     //now it's pc's turn
                     this.turn *= -1;
-                    // if (this.onChangeTurn) this.onChangeTurn();
                 }
             } else {
                 console.log("Invalid movement");
-                // if (this.onIncorrectMove) this.onIncorrectMove();
                 return false;
             }
         } else {
             //it isn't the user's turn
             console.log("It is not your turn " + this.user + "!");
-            // if (this.onIncorrectTurn) this.onIncorrectTurn();
             return false;
         }
         return true;
@@ -148,6 +141,7 @@ function game(user) {
 
     //the user draws one card from the deck
     this.drawUser = function() {
+        if(this.winner != 2) return;
         if (this.turn == 1) {
             if (this.deck.length > 0) {
                 this.userCards.push(this.deck.pop());
@@ -161,7 +155,6 @@ function game(user) {
             }
         } else {
             console.log("It is not your turn " + this.user + "!");
-            // if (this.onIncorrectTurn) this.onIncorrectTurn();
         }
     }
 
@@ -184,7 +177,6 @@ function game(user) {
                 this.pile.push(pcChosenCard);
                 pcChosenCardId = pcChosenCard.id;
                 console.log("Successfull play from the PC");
-                // this.onSuccessPC(pos);
             }
             if (this.computerCards.length == 0) {
                 console.log("PC wins!");
@@ -207,11 +199,9 @@ function game(user) {
                 });
             } else {
                 this.turn *= -1;
-                // if (this.onChangeTurn) this.onChangeTurn();
             }
         } else {
             console.log("It's not the turn of the PC");
-            // if (this.onIncorrectTurn) this.onIncorrectTurn();
         }
         return pcChosenCardId;
     }
@@ -232,10 +222,13 @@ function actualizarTodo(arg) {
         actualizarCartas(partida.userCards, "cartas_usuario");
         actualizarCartas(partida.computerCards, "cartas_pc");
     } else if (partida.winner != 2) {
-        if (partida.winner == 0)
+        actualizarCartas(partida.userCards, "cartas_usuario");
+        if (partida.winner == 0){
             juego.innerHTML = "<h1>¡Empate!</h1>";
-        else
+        }else{
+            document.getElementById("ultima_pila").src = partida.pile.top().url();
             juego.innerHTML = "<h1>¡" + (partida.winner == 1 ? partida.user : "PC") + " gana!</h1>";
+        }
     }
 }
 
@@ -287,12 +280,9 @@ function nueva(usuario) {
     partida.onGiveComputerCards = actualizarTodo;
     partida.onInitialCard = actualizarTodo;
     partida.onSuccessUser = actualizarTodo;
-    partida.onChangeTurn = actualizarTodo;
-    partida.onIncorrectTurn = actualizarTodo;
     partida.onGameOver = actualizarTodo;
     partida.onUserDraws = actualizarTodo;
     partida.onPCDraws = actualizarTodo;
-    partida.onSuccessPC = actualizarTodo;
     partida.init();
     db.transaction(function(tx) {
         tx.executeSql('insert into scores (username, wins, losses) values (?, ?, ?)', [usuario, 0, 0]);
@@ -352,6 +342,7 @@ function movePcCard() {
         actualizarTodo(0);
         document.body.removeChild(clone);
         clearInterval(animation);
+        document.getElementById("ultima_pila").src = partida.pile.top().url();
         return;
     }
     if (pcTop != deckTop)
@@ -368,21 +359,19 @@ function movePcCard() {
 
 document.getElementById("ultimaPila").ondragenter = function(ev) {
     ev.preventDefault();
-    //
 }
 
 document.getElementById("ultimaPila").ondragleave = function(ev) {
     ev.preventDefault();
-    //
 }
 
 document.getElementById("ultimaPila").ondragover = function(ev) {
     ev.preventDefault();
-    //
 }
 
 document.getElementById("ultimaPila").ondrop = function(ev) {
     ev.preventDefault();
+    actualizarTodo(0);
     if (partida.goUser(ev.dataTransfer.getData("text")) && partida.winner == 2) {
         actualizarTodo(0);
         pcChosenCardId = partida.playComputer();
@@ -410,6 +399,8 @@ document.getElementById("ultimaPila").ondrop = function(ev) {
 
                 document.body.appendChild(clone);
                 animation = setInterval(movePcCard, 2);
+            }else{
+                actualizarTodo(0);
             }
         }, 1000);
     }
@@ -428,8 +419,4 @@ window.onclick = function(event) {
 
 cerrar.onclick = function() {
     modal.style.display = "none";
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
