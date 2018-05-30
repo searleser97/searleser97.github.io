@@ -110,7 +110,7 @@ function game(user) {
                     console.log(user + " wins!");
                     this.playing = false;
                     this.winner = 1;
-                    // if (this.onGameOver) this.onGameOver();
+                    if (this.onGameOver) this.onGameOver();
                     if (users[user] == undefined)
                         users[user] = [0, 0];
                     if (users['pc'] == undefined)
@@ -356,20 +356,21 @@ var pcChosenCardPos = { top: 0, left: 0 };
 var deckOffSets = ultimaPila.getBoundingClientRect();
 var clone = undefined;
 var animation;
+var yStep = 1;
 
 var pcTop, pcLeft, deckTop, deckLeft;
 
 function movePcCard() {
     console.log('deck top, left: ' + deckTop + ' ' + deckLeft);
     console.log('pc top, left: ' + pcTop + ' ' + pcLeft);
-    if (pcTop == deckTop && pcLeft == deckLeft) {
+    if (pcTop >= deckTop && pcLeft == deckLeft) {
         actualizarTodo(0);
         document.body.removeChild(clone);
         clearInterval(animation);
         return;
     }
     if (pcTop != deckTop)
-        pcTop++;
+        pcTop += yStep;
     if (pcLeft != deckLeft) {
         if (pcLeft < deckLeft)
             pcLeft++;
@@ -394,6 +395,7 @@ document.getElementById("ultimaPila").ondrop = function(ev) {
                 deckTop = Math.floor(deckPos.top);
                 pcLeft = Math.floor(pcChosenCardPos.left);
                 pcTop = Math.floor(pcChosenCardPos.top);
+                yStep = (deckTop - pcTop) / Math.abs(pcLeft - deckLeft);
 
                 clone = pcChosenCardDiv.cloneNode();
 
@@ -407,7 +409,7 @@ document.getElementById("ultimaPila").ondrop = function(ev) {
                 clone.id = 'pcChosenCard';
 
                 document.body.appendChild(clone);
-                animation = setInterval(movePcCard, 5);
+                animation = setInterval(movePcCard, 2);
             }
         }, 1000);
     }
