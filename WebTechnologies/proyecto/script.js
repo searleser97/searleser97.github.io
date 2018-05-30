@@ -337,21 +337,6 @@ function load_scores() {
 
 load_scores();
 
-document.getElementById("ultimaPila").ondragenter = function(ev) {
-    ev.preventDefault();
-    //
-}
-
-document.getElementById("ultimaPila").ondragleave = function(ev) {
-    ev.preventDefault();
-    //
-}
-
-document.getElementById("ultimaPila").ondragover = function(ev) {
-    ev.preventDefault();
-    //
-}
-
 var pcChosenCardPos = { top: 0, left: 0 };
 var deckOffSets = ultimaPila.getBoundingClientRect();
 var clone = undefined;
