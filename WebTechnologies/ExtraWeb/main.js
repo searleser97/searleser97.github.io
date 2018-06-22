@@ -98,6 +98,74 @@ hexagramNames[62] = "Hsiao Kuo";
 hexagramNames[63] = "Chi Chi";
 hexagramNames[64] = "Wei Chi";
 
+hexagramDescription = {}
+
+hexagramDescription[1] = '1. Cielo. Lo creativo. El principio generador'
+hexagramDescription[2] = '2. Tierra. Lo receptivo. El principio pasivo'
+hexagramDescription[3] = '3. Acumular. El obstáculo inicial. La dificultad del comienzo'
+hexagramDescription[4] = '4. Juventud. El joven necio. La inmadurez.'
+hexagramDescription[5] = '5. Esperar. La espera. La maduración.'
+hexagramDescription[6] = '6. Disputar. El conflicto. El pleito.'
+hexagramDescription[7] = '7. Ejército. La legión.'
+hexagramDescription[8] = '8. Solidaridad. La unión'
+hexagramDescription[9] = '9. Animalito doméstico. La pequeña fuerza'
+hexagramDescription[10] = '10. Caminar. El porte. El paso cauteloso'
+hexagramDescription[11] = '11. Prosperidad. La paz. La armonía.'
+hexagramDescription[12] = '12. Cierre. El estancamiento. Lo inerte.'
+hexagramDescription[13] = '13. Hombres Reunidos. La unión comunitaria'
+hexagramDescription[14] = '14. Gran dominio. La gran posesión. Lo que se tiene de más.'
+hexagramDescription[15] = '15. Condescendencia. La modestia. La humildad'
+hexagramDescription[16] = '16. Ocuparse. El entusiasmo. La algarabía.'
+hexagramDescription[17] = '17. Conformarse. La continuidad. El seguimiento.18. Destrucción. La reconstrucción. La labor en lo corrompido.'
+hexagramDescription[18] = '18. Destrucción. La reconstrucción. La labor en lo corrompido.'
+hexagramDescription[19] = '19. Acercarse. Lo que va llegando.'
+hexagramDescription[20] = '20. Observar. La contemplación.'
+hexagramDescription[21] = '21. Quebrar mordiendo. La dentellada. La filosa mordedura'
+hexagramDescription[22] = '22. Adornar. La elegancia. La gracia.'
+hexagramDescription[23] = '23. Resquebrajar. La desintegración. El derrumbe'
+hexagramDescription[24] = '24. Regresar. El retorno. Lo que vuelve.'
+hexagramDescription[25] = '25. Sinceridad. La inocencia. La naturalidad.'
+hexagramDescription[26] = '26. Fuerza educadora. El poder de lo fuerte. La gran acumulación.'
+hexagramDescription[27] = '27. Nutrirse. La alimentación. Las fauces.'
+hexagramDescription[28] = '28. Excesos. La preponderancia de lo grande.'
+hexagramDescription[29] = '29. Peligro. Lo abismal. La caida.'
+hexagramDescription[30] = '30. Distinguir. El resplandor. Lo adherente.'
+hexagramDescription[31] = '31. Unir. La influencia.La atracción.'
+hexagramDescription[32] = '32. Luna Creciente. La duración. La permanencia.'
+hexagramDescription[33] = '33. Retirarse. EL repliegue.'
+hexagramDescription[34] = '34. Gran fuerza. El gran vigor.'
+hexagramDescription[35] = '35. Progresar. El avance.'
+hexagramDescription[36] = '36. Luz que se apaga. El oscurecimiento.'
+hexagramDescription[37] = '37. Gente de familia. El clan.'
+hexagramDescription[38] = '38. Contraste. La oposición. El antagonismo.'
+hexagramDescription[39] = '39. Dificultad. El obstáculo. El impedimento.'
+hexagramDescription[40] = '40. Explicar. La liberación. El alivio.'
+hexagramDescription[41] = '41. Perder. La disminución.'
+hexagramDescription[42] = '42. Evolución. El aumento. La ganancia.'
+hexagramDescription[43] = '43. Decidir. El desbordamiento. La resolución.'
+hexagramDescription[44] = '44. Encontrarse. El acoplamiento.'
+hexagramDescription[45] = '45. Cosechar. La reunión. La convergencia.'
+hexagramDescription[46] = '46. Subir. El ascenso. La escalada.'
+hexagramDescription[47] = '47. Angustia. La pesadumbre. El agotamiento.'
+hexagramDescription[48] = '48. El pozo de agua. La fuente.'
+hexagramDescription[49] = '49. Renovar. La revolución. El cambio'
+hexagramDescription[50] = '50. La caldera. Lo alquímico'
+hexagramDescription[51] = '51. Trueno. La conmoción. Lo suscitativo.'
+hexagramDescription[52] = '52. Cimientos. La quietud. La detención.'
+hexagramDescription[53] = '53. Evolución. El progreso gradual.'
+hexagramDescription[54] = '54. Desposar a la hija menor. La doncella.'
+hexagramDescription[55] = '55. Abundancia. La plenitud.'
+hexagramDescription[56] = '56. Viajero. El andariego'
+hexagramDescription[57] = '57. Viento. Lo penetrante. Lo suave.'
+hexagramDescription[58] = '58. Recogerse. La serenidad. La satisfacción.'
+hexagramDescription[59] = '59. Confusión. La dispersión. La disolución'
+hexagramDescription[60] = '60. Moderación. La restricción. La limitación'
+hexagramDescription[61] = '61. Fe Interior. La verdad interior. La sinceridad interna.'
+hexagramDescription[62] = '62. Pequeñas cosas importantes. La pequeña preponderancia.63. Conclusiones. Después de la realización.'
+hexagramDescription[63] = '63. Conclusiones. Después de la realización.'
+hexagramDescription[64] = '64. Inconcluso. Antes de la realización.'
+
+
 
 function createTrigramTable() {
     var table = document.getElementById('trigramTable');
@@ -155,6 +223,7 @@ class Hexagram {
         this.lowerTrigram = undefined;
         this.isComplete = false;
         this.numberOfMutantLines = 0;
+        this.description = undefined;
     }
 
     add(line) {
@@ -170,9 +239,12 @@ class Hexagram {
             this.isComplete = true;
             if (!this.isMutant) {
                 this.upperTrigram = parseInt(this.lines[5].id + '' + this.lines[4].id + '' + this.lines[3].id);
-                this.lowerTrigram = parseInt(this.lines[3].id + '' + this.lines[2].id + '' + this.lines[1].id);
+                this.lowerTrigram = parseInt(this.lines[2].id + '' + this.lines[1].id + '' + this.lines[0].id);
+                console.log(this.upperTrigram)
+                console.log(this.lowerTrigram)
                 this.id = hexagramNumbers[trigram[this.lowerTrigram]][trigram[this.upperTrigram]];
                 this.name = hexagramNames[this.id];
+                this.description = hexagramDescription[this.id];
             }
         }
         return true;
@@ -191,6 +263,9 @@ class Hexagram {
         this.isComplete = false;
         this.id = undefined;
         this.name = undefined;
+        this.upperTrigram = undefined;
+        this.lowerTrigram = undefined;
+        this.description = '';
         return true;
     }
 
@@ -199,9 +274,15 @@ class Hexagram {
     }
 
     reset() {
-        this.principal = []
-        this.alternative1 = []
-        this.alternative2 = []
+        this.isMutant = false;
+        this.lines = [];
+        this.id = undefined;
+        this.name = undefined;
+        this.upperTrigram = undefined;
+        this.lowerTrigram = undefined;
+        this.isComplete = false;
+        this.numberOfMutantLines = 0;
+        this.description = '';
     }
 };
 
@@ -213,15 +294,18 @@ function getLineDiv(lineType) {
     var widths = ['0', '50%'];
     var value = '';
     var values = { 6: 'X', 9: 'O', 7: '', 8: '' };
+    var border = '';
     if (lineType != 7) {
         widths[0] = '10%';
         widths[1] = '45%';
     }
+    if (lineType == 9)
+        border = 'border-bottom: 2px solid black';
 
     html = '' +
         '<div class="line">' +
         '<div class="line_left" style="width: ' + widths[1] + ';"></div>' +
-        '<div class="line_center" style="width: ' + widths[0] + ';">' + values[lineType] + '</div>' +
+        '<div class="line_center" style="width: ' + widths[0] + ';' + border + '">' + values[lineType] + '</div>' +
         '<div class="line_right" style="width: ' + widths[1] + ';"></div>' +
         '</div>';
     return html;
@@ -303,4 +387,20 @@ function reset() {
     alternative1 = new Hexagram();
     alternative2 = new Hexagram();
     updateHexagramView();
+}
+
+desc = document.getElementById('description');
+function hex1Desc() {
+    if (hexagram.description != '' && hexagram.description != undefined)
+        desc.innerHTML = hexagram.description;
+}
+
+function hex2Desc() {
+    if (alternative1.description != '' && alternative1.description != undefined)
+        desc.innerHTML = alternative1.description;
+}
+
+function hex3Desc() {
+    if (alternative2.description != '' && alternative2.description != undefined)
+        desc.innerHTML = alternative2.description;
 }
