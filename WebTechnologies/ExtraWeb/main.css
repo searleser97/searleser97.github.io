@@ -1,7 +1,8 @@
 .input {
     display: flex;
-    width: 99%;
+    width: 97%;
     margin-top: 10px;
+    height: 40px;
 }
 
 .inputs {
@@ -32,7 +33,7 @@
     flex-direction: column;
     width: 95%;
     align-items: center;
-    margin-top: 70px;
+    margin-top: 40px;
 }
 
 .container {
@@ -64,7 +65,7 @@
     display: flex;
     width: 70%;
     flex-direction: column;
-    margin-left: 10px;
+    margin-left: 25px;
 }
 
 table {
@@ -93,13 +94,14 @@ table {
     border-radius: 30px;
     padding: 8px;
     padding-bottom: 25px;
+    box-shadow: -5px 8px 21px -1px rgba(0,0,0,0.75);
 }
 
 .rightBottom {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 .table {
@@ -136,8 +138,8 @@ table {
     flex-grow: 1;
     text-align: center;
     align-items: center;
-    text-align: center;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
 
     font-weight: bold;
 
@@ -150,6 +152,8 @@ table {
     text-align: center;
 
     cursor: pointer;
+
+    height: 40px;
 }
 
 .btn:hover {
@@ -176,7 +180,8 @@ table {
     position: fixed;
     width: 90%;
     height: 80px;
-    background-color: lightblue;
+    background-color: rgba(74, 191, 226, 0.9);
+
     border: 2px solid blue;
     left: 0;
     right: 0;
@@ -197,4 +202,13 @@ table {
 
 .hex3:hover ~ .description {
     top: 0px;
+}
+
+.td {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
 }

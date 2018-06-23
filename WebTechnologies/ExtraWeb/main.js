@@ -190,7 +190,7 @@ function createTrigramTable() {
         '<div style="display: flex; width: 100%; align-items: center; flex-direction: column;">' + trigramNames[i] + '</div></td>' +
         '</td>';
         for (var j = 0; j < 8; j++) {
-            htmlTable += '<td style="color: darkblue; font-weight: bold;" id="hexId_' + hexagramNumbers[i][j] + '">' + hexagramNumbers[i][j] + '</td>';
+            htmlTable += '<td style="color: darkblue; font-weight: bold;" ><div class="td" id="hexId_' + hexagramNumbers[i][j] + '">' + hexagramNumbers[i][j] + '</div></td>';
         }
         htmlTable += '</tr>';
     }
@@ -328,19 +328,24 @@ function updateHexagramView() {
     if (hexagram.isComplete) {
         var nameStyle = 'display: flex; margin-top: 20px; font-weight: bold;';
         var border = '3px solid green';
+        var border_radius = '30%';
         var background = 'lightgreen';
         if (hexagram.isMutant) {
             htmlhex2 += '<div style="' + nameStyle + '">' + alternative1.id + '.' + alternative1.name + '</div>';
             htmlhex3 += '<div style="' + nameStyle + '">' + alternative2.id + '.' + alternative2.name + '</div>';
+            
             document.getElementById('hexId_' + alternative1.id).style['border'] = border;
-            document.getElementById('hexId_' + alternative2.id).style['border'] = border;
-
             document.getElementById('hexId_' + alternative1.id).style['background-color'] = background;
+            document.getElementById('hexId_' + alternative1.id).style['border-radius'] = border_radius;
+
+            document.getElementById('hexId_' + alternative2.id).style['border'] = border;
             document.getElementById('hexId_' + alternative2.id).style['background-color'] = background;
+            document.getElementById('hexId_' + alternative2.id).style['border-radius'] = border_radius;
         } else {
             htmlhex1 += '<div style="' + nameStyle + '">' + hexagram.id + '.' + hexagram.name + '</div>';
             document.getElementById('hexId_' + hexagram.id).style['border'] = border;
             document.getElementById('hexId_' + hexagram.id).style['background-color'] = background;
+            document.getElementById('hexId_' + hexagram.id).style['border-radius'] = border_radius;
         }
     } else {
         createTrigramTable();
@@ -379,6 +384,8 @@ function add() {
 
 function pop() {
     hexagram.pop();
+    alternative1.pop();
+    alternative2.pop();
     updateHexagramView();
 }
 
@@ -389,18 +396,26 @@ function reset() {
     updateHexagramView();
 }
 
+var description = '<center>DESCRIPCI&Oacute;N</center><br>';
+
 desc = document.getElementById('description');
 function hex1Desc() {
     if (hexagram.description != '' && hexagram.description != undefined)
-        desc.innerHTML = hexagram.description;
+        desc.innerHTML = description + hexagram.description;
+    else
+        desc.innerHTML = description;
 }
 
 function hex2Desc() {
     if (alternative1.description != '' && alternative1.description != undefined)
-        desc.innerHTML = alternative1.description;
+        desc.innerHTML = description + alternative1.description;
+    else
+        desc.innerHTML = description;
 }
 
 function hex3Desc() {
     if (alternative2.description != '' && alternative2.description != undefined)
-        desc.innerHTML = alternative2.description;
+        desc.innerHTML = description + alternative2.description;
+    else
+        desc.innerHTML = description;
 }
