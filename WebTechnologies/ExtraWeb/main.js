@@ -1,3 +1,4 @@
+//Autor: Sanchez Valencia Segio Gabriel
 hexagramNumbers = [
     [1, 34, 5, 26, 11, 9, 14, 43],
     [25, 51, 3, 27, 24, 42, 21, 17],
