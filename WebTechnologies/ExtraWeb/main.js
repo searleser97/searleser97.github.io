@@ -179,8 +179,8 @@ function createTrigramTable() {
 
     for (var i = 0; i < 8; i++) {
         htmlTable += '<td style="padding: 5px;">' +
-        '<div style="display: flex; width:50px; height:50px; background: url(images/trigrams/' + i + '.svg) no-repeat; background-size: 100% 100%;"></div>' +
-        '<div style="display: flex; width: 100%; align-items: center; flex-direction: column;">' + trigramNames[i] + '</div></td>';
+            '<div style="display: flex; width:50px; height:50px; background: url(images/trigrams/' + i + '.svg) no-repeat; background-size: 100% 100%;"></div>' +
+            '<div style="display: flex; width: 100%; align-items: center; flex-direction: column;">' + trigramNames[i] + '</div></td>';
     }
     htmlTable += '' +
         '</tr>' +
@@ -189,10 +189,10 @@ function createTrigramTable() {
     for (var i = 0; i < 8; i++) {
 
         htmlTable += '<tr>';
-        htmlTable += '<td style="display: flex; align-items: center; border-right: 3px solid black; padding: 5px;">'+
-        '<div style="display: flex; width:50%; height:50px; background: url(images/trigrams/' + i + '.svg) no-repeat; background-size: 100% 100%;"></div>' +
-        '<div style="display: flex; width: 50%; align-items: center; flex-direction: column;">' + trigramNames[i] + '</div></td>' +
-        '</td>';
+        htmlTable += '<td style="display: flex; align-items: center; border-right: 3px solid black; padding: 5px;">' +
+            '<div style="display: flex; width:50%; height:50px; background: url(images/trigrams/' + i + '.svg) no-repeat; background-size: 100% 100%;"></div>' +
+            '<div style="display: flex; width: 50%; align-items: center; flex-direction: column;">' + trigramNames[i] + '</div></td>' +
+            '</td>';
         for (var j = 0; j < 8; j++) {
             htmlTable += '<td style="color: darkblue; font-weight: bold;" ><div class="td" id="hexId_' + hexagramNumbers[i][j] + '">' + hexagramNumbers[i][j] + '</div></td>';
         }
@@ -309,6 +309,8 @@ function getLineDiv(lineType, isLast, action) {
     if (isLast) {
         if (action == 'add')
             style = 'animation-name: newLine;animation-duration: 1s;';
+        if (action == 'pop')
+            style = 'animation-name: popLine;animation-duration: 0.5s;';
     }
     html = '' +
         '<div class="line" style="' + style + '">' +
@@ -323,21 +325,24 @@ function updateHexagramView(action) {
     var hex1 = document.getElementById('hex1');
     var hex2 = document.getElementById('hex2');
     var hex3 = document.getElementById('hex3');
-    hex1.style['display'] = 'flex';
+    hex1.style['display'] = 'none';
     var htmlhex1 = '';
     var htmlhex2 = '';
     var htmlhex3 = '';
+    if (hexagram.isMutant) {
+        hex2.style['display'] = 'flex';
+        hex3.style['display'] = 'flex';
+    } else {
+        hex2.style['display'] = 'none';
+        hex3.style['display'] = 'none';
+    }
     for (var i = 0; i < hexagram.lines.length; i++) {
+        hex1.style['display'] = 'flex';
         var isLast = i == (hexagram.lines.length - 1);
         htmlhex1 = getLineDiv(hexagram.lines[i].id, isLast, action) + htmlhex1;
         if (hexagram.isMutant) {
-            hex2.style['display'] = 'flex';
-            hex3.style['display'] = 'flex';
             htmlhex2 = getLineDiv(alternative1.lines[i].id, isLast, action) + htmlhex2;
             htmlhex3 = getLineDiv(alternative2.lines[i].id, isLast, action) + htmlhex3;
-        } else {
-            hex2.style['display'] = 'none';
-            hex3.style['display'] = 'none';
         }
     }
     if (hexagram.isComplete) {
@@ -349,7 +354,7 @@ function updateHexagramView(action) {
         if (hexagram.isMutant) {
             htmlhex2 += '<div class="hexname" style="' + nameStyle + '">' + alternative1.id + '.' + alternative1.name + '</div>';
             htmlhex3 += '<div class="hexname" style="' + nameStyle + '">' + alternative2.id + '.' + alternative2.name + '</div>';
-            
+
             document.getElementById('hexId_' + alternative1.id).style['border'] = border;
             document.getElementById('hexId_' + alternative1.id).style['background-color'] = background;
             document.getElementById('hexId_' + alternative1.id).style['border-radius'] = border_radius;
@@ -417,6 +422,7 @@ var description = '<center>DESCRIPCI&Oacute;N</center><br>';
 
 //desc - short for description
 desc = document.getElementById('description');
+
 function hex1Desc() {
     if (hexagram.description != '' && hexagram.description != undefined)
         desc.innerHTML = description + hexagram.description;
