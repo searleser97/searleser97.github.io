@@ -1,0 +1,16 @@
+{
+  "name": "web-socket",
+  "version": "0.0.1",
+  "main": "websocket.js",
+  "description": "web socket app for a chat in angular",
+  "dependencies": {
+    "delivery": "0.0.6",
+    "express": "^4.16.3",
+    "fs-extra": "^7.0.0",
+    "socket.io": "^2.1.1",
+    "socketio-file-upload": "^0.6.2"
+  },
+  "scripts": {
+    "start": "node websocket.js"
+  }
+}
