@@ -1,9 +1,12 @@
-const ws_port = 3000;
-let io = require('socket.io')(ws_port);
+let port = process.env.PORT;
+if (port == null || port == "" || port == undefined) {
+    port = 3000;
+}
+let io = require('socket.io')(port);
 let SocketIOFileUpload = require('socketio-file-upload');
 let fs = require('fs-extra')
 
-console.log('\nWeb Socket Server running on port: ' + ws_port + '\n');
+console.log('\nWeb Socket Server running on port: ' + port + '\n');
 
 
 let userForUserId = new Object();
